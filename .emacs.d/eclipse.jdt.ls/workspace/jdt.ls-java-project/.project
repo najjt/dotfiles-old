@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>jdt.ls-java-project</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>src/Main.java</name>
+			<type>1</type>
+			<location>//Users/najjt/Projects/kod/mooc-java-programming-ii/part09-Part09_05.TacoBoxes/src/main/java/Main.java</location>
+		</link>
+		<link>
+			<name>src/Owner.java</name>
+			<type>1</type>
+			<location>/Users/najjt/Projects/kod/prog1/Hundregistret_v2/src/Owner.java</location>
+		</link>
+		<link>
+			<name>src/TacoBox.java</name>
+			<type>1</type>
+			<location>//Users/najjt/Projects/kod/mooc-java-programming-ii/part09-Part09_05.TacoBoxes/src/main/java/TacoBox.java</location>
+		</link>
+		<link>
+			<name>src/main/java/CustomTacoBox.java</name>
+			<type>1</type>
+			<location>//Users/najjt/Projects/kod/mooc-java-programming-ii/part09-Part09_05.TacoBoxes/src/main/java/CustomTacoBox.java</location>
+		</link>
+		<link>
+			<name>src/main/java/TripleTacoBox.java</name>
+			<type>1</type>
+			<location>//Users/najjt/Projects/kod/mooc-java-programming-ii/part09-Part09_05.TacoBoxes/src/main/java/TripleTacoBox.java</location>
+		</link>
+	</linkedResources>
+</projectDescription>

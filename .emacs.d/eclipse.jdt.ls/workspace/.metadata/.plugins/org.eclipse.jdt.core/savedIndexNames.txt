@@ -1,0 +1,11 @@
+INDEX VERSION 1.133+/Users/najjt/.emacs.d/eclipse.jdt.ls/workspace/.metadata/.plugins/org.eclipse.jdt.core
+3321272350.index
+1865797976.index
+2689412408.index
+544210111.index
+3842426239.index
+1681966135.index
+923121420.index
+1289808185.index
+3505800031.index
+2657394288.index

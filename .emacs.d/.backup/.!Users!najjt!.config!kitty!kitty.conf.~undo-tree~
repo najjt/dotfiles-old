@@ -1,0 +1,393 @@
+(undo-tree-save-format-version . 1)
+"4040b1b6352d0d77e49a84b3e3324d7b8a961a29"
+[nil nil nil nil (26030 44045 583731 0) 0 nil]
+([nil nil ((nil rear-nonsticky nil 484 . 485) (nil fontified nil 1 . 485) (1 . 485) (t . -1)) nil (26030 44045 583727 0) 0 nil])
+([nil nil ((#("font_family=JetBrains Mono
+font_size=17
+
+# tab bar
+hide_tab_bar_if_only_one_tab yes
+tab_bar_position bottom
+tab_max_width 20
+
+# window
+window_decorations none
+window_padding_width 0
+window_padding_height 0
+
+# functionality
+bell_command none
+scrollbar no
+
+# keyboard
+compose_key yes
+
+# keybindings
+map alt+/ new_window
+map alt+. new_window horizontal
+map cmd+w close_window
+map ctrl+shift+h focus_left
+map ctrl+shift+l focus_right
+map ctrl+shift+k focus_up
+map ctrl+shift+j focus_down
+" 0 11 (fontified t) 11 27 (fontified t) 27 36 (fontified t) 36 41 (fontified t) 41 43 (fontified t) 43 51 (fontified t) 51 126 (fontified t) 126 128 (fontified t) 128 135 (fontified t) 135 207 (fontified t) 207 209 (fontified t) 209 223 (fontified t) 223 255 (fontified t) 255 257 (fontified t) 257 266 (fontified t) 266 283 (fontified t) 283 285 (fontified t) 285 297 (fontified t) 297 483 (fontified t) 483 484 (rear-nonsticky t fontified t)) . 1) (undo-tree-id0 . -484) (undo-tree-id1 . -483) (undo-tree-id2 . -456) (undo-tree-id3 . -159) (undo-tree-id4 . -484) (undo-tree-id5 . -484) (undo-tree-id6 . -484) (undo-tree-id7 . -484) (undo-tree-id8 . -484) (undo-tree-id9 . -484) (undo-tree-id10 . -484) (undo-tree-id11 . -484) (undo-tree-id12 . -484) (undo-tree-id13 . -484) (undo-tree-id14 . -484) (undo-tree-id15 . -484) (undo-tree-id16 . -484) (undo-tree-id17 . -484) (undo-tree-id18 . -484) (undo-tree-id19 . -484) (undo-tree-id20 . -484) (undo-tree-id21 . -484) (undo-tree-id22 . -484) (undo-tree-id23 . -484) (undo-tree-id24 . -484) 485 (t 26030 44045 587165 440000)) nil (26030 44080 918774 0) 0 nil])
+([nil nil ((24 . 25) (#("8" 0 1 (fontified nil)) . 24) (t 26030 44110 788980 704000) (1 . 88311) (t 26030 44080 922041 665000)) nil (26030 44164 916771 0) 0 nil])
+([nil nil ((#("#" 0 1 (fontified t)) . 980) (undo-tree-id28 . -1) (undo-tree-id29 . -1) (t 26030 44116 738601 41000)) nil (26030 44164 916770 0) 0 nil])
+([nil nil ((#(" " 0 1 (fontified t)) . 980) (undo-tree-id26 . -1) (undo-tree-id27 . -1)) nil (26030 44164 916767 0) 0 nil])
+([nil nil ((991 . 992) (#("1" 0 1 (fontified t)) . 991) (undo-tree-id25 . -1)) nil (26030 44164 916761 0) 0 nil])
+([nil nil ((980 . 982) (t 26030 44164 928814 408000)) nil (26030 44183 619278 0) 0 nil])
+([nil nil ((#("#" 0 1 (fontified t)) . 980) (undo-tree-id32 . -1) (undo-tree-id33 . -1) (undo-tree-id34 . -1) (undo-tree-id35 . -1) (undo-tree-id36 . -1) (undo-tree-id37 . -1) (undo-tree-id38 . -1) (undo-tree-id39 . -1) (undo-tree-id40 . -1) (undo-tree-id41 . -1) (undo-tree-id42 . -1) (undo-tree-id43 . -1) (undo-tree-id44 . -1) (undo-tree-id45 . -1) (undo-tree-id46 . -1) (undo-tree-id47 . -1) (undo-tree-id48 . -1) (undo-tree-id49 . -1) (undo-tree-id50 . -1) (undo-tree-id51 . -1) (undo-tree-id52 . -1) (undo-tree-id53 . -1) (undo-tree-id54 . -1) (undo-tree-id55 . -1) (undo-tree-id56 . -1) (undo-tree-id57 . -1) (undo-tree-id58 . -1) (undo-tree-id59 . -1) (undo-tree-id60 . -1) (undo-tree-id61 . -1) (undo-tree-id62 . -1) (undo-tree-id63 . -1) (undo-tree-id64 . -1) (undo-tree-id65 . -1) (t 26030 44183 626507 117000)) nil (26030 44190 216433 0) 0 nil])
+([nil nil ((#(" " 0 1 (fontified t)) . 980) (undo-tree-id30 . -1) (undo-tree-id31 . -1)) nil (26030 44190 216411 0) 0 nil])
+([nil nil ((227 . 241) (#("monospace" 0 9 (fontified t)) . 227) (undo-tree-id81 . -8) (undo-tree-id82 . -9) (undo-tree-id83 . -9) (undo-tree-id84 . -9) (undo-tree-id85 . -9) (t 26030 44190 223565 409000)) nil (26030 44302 476617 0) 0 nil])
+([nil nil ((#("#" 0 1 (fontified t)) . 208) (undo-tree-id79 . -1) (undo-tree-id80 . -1)) nil (26030 44302 476612 0) 0 nil])
+([nil nil ((#(" " 0 1 (fontified t)) . 208) (undo-tree-id66 . -1) (undo-tree-id67 . -1) (undo-tree-id68 . -1) (undo-tree-id69 . -1) (undo-tree-id70 . -1) (undo-tree-id71 . -1) (undo-tree-id72 . -1) (undo-tree-id73 . -1) (undo-tree-id74 . -1) (undo-tree-id75 . -1) (undo-tree-id76 . -1) (undo-tree-id77 . -1) (undo-tree-id78 . -1)) nil (26030 44302 476606 0) 0 nil])
+([nil nil ((994 . 995) (#("4" 0 1 (fontified t)) . 994) (undo-tree-id86 . -1) (t 26030 44302 486135 27000)) nil (26030 44416 592784 0) 0 nil])
+([nil nil ((994 . 995) (#("6" 0 1 (fontified t)) . 994) (undo-tree-id87 . -1) (t 26030 44416 599198 426000)) nil (26030 44424 113685 0) 0 nil])
+([nil nil ((#("-" 0 1 (fontified t)) . 12210) (undo-tree-id94 . -1) (undo-tree-id95 . -1) (undo-tree-id96 . -1) (undo-tree-id97 . -1) (undo-tree-id98 . -1) (undo-tree-id99 . -1) (undo-tree-id100 . -1) (undo-tree-id101 . -1) (undo-tree-id102 . -1) (undo-tree-id103 . -1) (undo-tree-id104 . -1) (undo-tree-id105 . -1) (undo-tree-id106 . -1) (undo-tree-id107 . -1) (undo-tree-id108 . -1) (undo-tree-id109 . -1) (undo-tree-id110 . -1) (undo-tree-id111 . -1) (t 26030 44424 120280 268000)) nil (26030 44449 661358 0) 0 nil])
+([nil nil ((12210 . 12211) (#("o" 0 1 (fontified t)) . 12210) (undo-tree-id92 . -1) (12210 . 12211) (#("1" 0 1 (fontified t)) . 12210) (undo-tree-id93 . -1)) nil (26030 44449 661347 0) 0 nil])
+([nil nil ((#("#" 0 1 (fontified t)) . 12186) (undo-tree-id90 . -1) (undo-tree-id91 . -1)) nil (26030 44449 661344 0) 0 nil])
+([nil nil ((#(" " 0 1 (fontified t)) . 12186) (undo-tree-id88 . -1) (undo-tree-id89 . -1)) nil (26030 44449 661339 0) 0 nil])
+([nil nil ((#("#" 0 1 (fontified t)) . 34199) (undo-tree-id133 . -1) (undo-tree-id134 . -1) (t 26030 44449 667425 640000)) nil (26030 44477 683271 0) 0 nil])
+([nil nil ((#(" " 0 1 (fontified t)) . 34199) (undo-tree-id131 . -1) (undo-tree-id132 . -1)) nil (26030 44477 683268 0) 0 nil])
+([nil nil ((34223 . 34226) (#("no" 0 2 (fontified t)) . 34223) (undo-tree-id112 . -1) (undo-tree-id113 . -1) (undo-tree-id114 . -1) (undo-tree-id115 . -1) (undo-tree-id116 . -1) (undo-tree-id117 . -1) (undo-tree-id118 . -1) (undo-tree-id119 . -1) (undo-tree-id120 . -1) (undo-tree-id121 . -1) (undo-tree-id122 . -1) (undo-tree-id123 . -1) (undo-tree-id124 . -1) (undo-tree-id125 . -1) (undo-tree-id126 . -1) (undo-tree-id127 . -1) (undo-tree-id128 . -1) (undo-tree-id129 . -2) (undo-tree-id130 . -2)) nil (26030 44477 683263 0) 0 nil])
+([nil nil ((34223 . 34236) (#("yes" 0 3 (fontified t)) . 34223) (undo-tree-id135 . -2) (undo-tree-id136 . -2) (undo-tree-id137 . -2) (undo-tree-id138 . -2) (undo-tree-id139 . -2) (undo-tree-id140 . -2) (undo-tree-id141 . -2) (undo-tree-id142 . -2) (undo-tree-id143 . -2) (undo-tree-id144 . -2) (undo-tree-id145 . -2) (undo-tree-id146 . -2) (undo-tree-id147 . -2) (undo-tree-id148 . -2) (undo-tree-id149 . -2) (undo-tree-id150 . -2) (undo-tree-id151 . -2) (undo-tree-id152 . -2) (undo-tree-id153 . -2) (undo-tree-id154 . -2) (undo-tree-id155 . -2) (undo-tree-id156 . -2) (undo-tree-id157 . -2) (undo-tree-id158 . -2) (undo-tree-id159 . -2) (undo-tree-id160 . -2) (undo-tree-id161 . -2) (undo-tree-id162 . -2) (undo-tree-id163 . -2) (undo-tree-id164 . -2) (undo-tree-id165 . -2) (undo-tree-id166 . -2) (undo-tree-id167 . -2) (undo-tree-id168 . -2) (undo-tree-id169 . -2) (undo-tree-id170 . -2) (undo-tree-id171 . -2) (undo-tree-id172 . -2) (undo-tree-id173 . -2) (undo-tree-id174 . -2) (undo-tree-id175 . -2) (undo-tree-id176 . -2) (undo-tree-id177 . -2) (undo-tree-id178 . -2) (undo-tree-id179 . -2) (undo-tree-id180 . -2) (undo-tree-id181 . -2) (undo-tree-id182 . -3) (undo-tree-id183 . -3) (t 26030 44477 689995 99000)) nil (26030 44523 508230 0) 0 nil])
+([nil nil ((#("
+# tab_bar_edge bottom
+
+#: The edge to show the tab bar on, top or bottom.
+
+# tab_bar_margin_width 0.0
+
+#: The margin to the left and right of the tab bar (in pts).
+
+# tab_bar_margin_height 0.0 0.0
+
+#: The margin above and below the tab bar (in pts). The first number
+#: is the margin between the edge of the OS Window and the tab bar.
+#: The second number is the margin between the tab bar and the
+#: contents of the current tab.
+
+# tab_bar_style fade
+
+#: The tab bar style, can be one of:
+
+#: fade
+#:     Each tab's edges fade into the background color. (See also tab_fade)
+#: slant
+#:     Tabs look like the tabs in a physical file.
+#: separator
+#:     Tabs are separated by a configurable separator. (See also
+#:     tab_separator)
+#: powerline
+#:     Tabs are shown as a continuous line with \"fancy\" separators.
+#:     (See also tab_powerline_style)
+#: custom
+#:     A user-supplied Python function called draw_tab is loaded from the file
+#:     tab_bar.py in the kitty config directory. For examples of how to
+#:     write such a function, see the functions named draw_tab_with_* in
+#:     kitty's source code: kitty/tab_bar.py. See also
+#:     this discussion <https://github.com/kovidgoyal/kitty/discussions/4447>
+#:     for examples from kitty users.
+#: hidden
+#:     The tab bar is hidden. If you use this, you might want to create
+#:     a mapping for the select_tab action which presents you with a list of
+#:     tabs and allows for easy switching to a tab.
+
+# tab_bar_align left
+
+#: The horizontal alignment of the tab bar, can be one of: left,
+#: center, right.
+
+# tab_bar_min_tabs 2
+
+#: The minimum number of tabs that must exist before the tab bar is
+#: shown.
+
+# tab_switch_strategy previous
+
+#: The algorithm to use when switching to a tab when the current tab
+#: is closed. The default of previous will switch to the last used
+#: tab. A value of left will switch to the tab to the left of the
+#: closed tab. A value of right will switch to the tab to the right of
+#: the closed tab. A value of last will switch to the right-most tab.
+
+# tab_fade 0.25 0.5 0.75 1
+
+#: Control how each tab fades into the background when using fade for
+#: the tab_bar_style. Each number is an alpha (between zero and one)
+#: that controls how much the corresponding cell fades into the
+#: background, with zero being no fade and one being full fade. You
+#: can change the number of cells used by adding/removing entries to
+#: this list.
+
+# tab_separator \" ┇\"
+
+#: The separator between tabs in the tab bar when using separator as
+#: the tab_bar_style.
+
+# tab_powerline_style angled
+
+#: The powerline separator style between tabs in the tab bar when
+#: using powerline as the tab_bar_style, can be one of: angled,
+#: slanted, round.
+
+# tab_activity_symbol none
+
+#: Some text or a Unicode symbol to show on the tab if a window in the
+#: tab that does not have focus has some activity. If you want to use
+#: leading or trailing spaces, surround the text with quotes. See
+#: tab_title_template for how this is rendered.
+
+# tab_title_max_length 0
+
+#: The maximum number of cells that can be used to render the text in
+#: a tab. A value of zero means that no limit is applied.
+
+# tab_title_template \"{fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg.tab}{title}\"
+
+#: A template to render the tab title. The default just renders the
+#: title with optional symbols for bell and activity. If you wish to
+#: include the tab-index as well, use something like: {index}:{title}.
+#: Useful if you have shortcuts mapped for goto_tab N. If you prefer
+#: to see the index as a superscript, use {sup.index}. All data
+#: available is:
+
+#: title
+#:     The current tab title.
+#: index
+#:     The tab index usable with goto_tab N goto_tab shortcuts.
+#: layout_name
+#:     The current layout name.
+#: num_windows
+#:     The number of windows in the tab.
+#: num_window_groups
+#:     The number of window groups (a window group is a window and all of its overlay windows) in the tab.
+#: tab.active_wd
+#:     The working directory of the currently active window in the tab
+#:     (expensive, requires syscall). Use active_oldest_wd to get
+#:     the directory of the oldest foreground process rather than the newest.
+#: tab.active_exe
+#:     The name of the executable running in the foreground of the currently
+#:     active window in the tab (expensive, requires syscall). Use
+#:     active_oldest_exe for the oldest foreground process.
+#: max_title_length
+#:     The maximum title length available.
+
+#: Note that formatting is done by Python's string formatting
+#: machinery, so you can use, for instance, {layout_name[:2].upper()}
+#: to show only the first two letters of the layout name, upper-cased.
+#: If you want to style the text, you can use styling directives, for
+#: example:
+#: `{fmt.fg.red}red{fmt.fg.tab}normal{fmt.bg._00FF00}greenbg{fmt.bg.tab}`.
+#: Similarly, for bold and italic:
+#: `{fmt.bold}bold{fmt.nobold}normal{fmt.italic}italic{fmt.noitalic}`.
+#: Note that for backward compatibility, if {bell_symbol} or
+#: {activity_symbol} are not present in the template, they are
+#: prepended to it.
+
+# active_tab_title_template none
+
+#: Template to use for active tabs. If not specified falls back to
+#: tab_title_template.
+
+# active_tab_foreground   #000
+# active_tab_background   #eee
+# active_tab_font_style   bold-italic
+# inactive_tab_foreground #444
+# inactive_tab_background #999
+# inactive_tab_font_style normal
+
+#: Tab bar colors and styles.
+
+# tab_bar_background none
+
+#: Background color for the tab bar. Defaults to using the terminal
+#: background color.
+
+# tab_bar_margin_color none
+
+#: Color for the tab bar margin area. Defaults to using the terminal
+#: background color for margins above and below the tab bar. For side
+#: margins the default color is chosen to match the background color
+#: of the neighboring tab.
+" 0 155 (fontified t) 155 156 (face (rainbow-delimiters-depth-4-face) fontified t) 156 162 (fontified t) 162 163 (face (rainbow-delimiters-depth-4-face) fontified t) 163 241 (fontified t) 241 242 (face (rainbow-delimiters-depth-4-face) fontified t) 242 248 (fontified t) 248 249 (face (rainbow-delimiters-depth-4-face) fontified t) 249 556 (fontified t) 556 557 (face (rainbow-delimiters-depth-4-face) fontified t) 557 574 (fontified t) 574 575 (face (rainbow-delimiters-depth-4-face) fontified t) 575 704 (fontified t) 704 705 (face (rainbow-delimiters-depth-4-face) fontified t) 705 734 (fontified t) 734 735 (face (rainbow-delimiters-depth-4-face) fontified t) 735 797 (fontified t) 797 804 (face font-lock-string-face fontified t) 804 824 (fontified t) 824 825 (face (rainbow-delimiters-depth-4-face) fontified t) 825 853 (fontified t) 853 854 (face (rainbow-delimiters-depth-4-face) fontified t) 854 2199 (fontified t) 2199 2200 (face (rainbow-delimiters-depth-4-face) fontified t) 2200 2220 (fontified t) 2220 2221 (face (rainbow-delimiters-depth-4-face) fontified t) 2221 2454 (fontified t) 2454 2458 (face font-lock-string-face fontified t) 2458 3192 (fontified t) 3192 3255 (face font-lock-string-face fontified t) 3255 3448 (fontified t) 3448 3449 (face (rainbow-delimiters-depth-4-face) fontified t) 3449 3454 (fontified t) 3454 3455 (face (rainbow-delimiters-depth-4-face) fontified t) 3455 3456 (fontified t) 3456 3457 (face (rainbow-delimiters-depth-4-face) fontified t) 3457 3462 (fontified t) 3462 3463 (face (rainbow-delimiters-depth-4-face) fontified t) 3463 3576 (fontified t) 3576 3577 (face (rainbow-delimiters-depth-4-face) fontified t) 3577 3586 (fontified t) 3586 3587 (face (rainbow-delimiters-depth-4-face) fontified t) 3587 3887 (fontified t) 3887 3888 (face (rainbow-delimiters-depth-4-face) fontified t) 3888 3945 (fontified t) 3945 3946 (face (rainbow-delimiters-depth-4-face) fontified t) 3946 4054 (fontified t) 4054 4055 (face (rainbow-delimiters-depth-4-face) fontified t) 4055 4082 (fontified t) 4082 4083 (face (rainbow-delimiters-depth-4-face) fontified t) 4083 4318 (fontified t) 4318 4319 (face (rainbow-delimiters-depth-4-face) fontified t) 4319 4346 (fontified t) 4346 4347 (face (rainbow-delimiters-depth-4-face) fontified t) 4347 4583 (fontified t) 4583 4584 (face (rainbow-delimiters-depth-4-face) fontified t) 4584 4595 (fontified t) 4595 4596 (face (rainbow-delimiters-depth-5-face) fontified t) 4596 4598 (fontified t) 4598 4599 (face (rainbow-delimiters-depth-5-face) fontified t) 4599 4605 (fontified t) 4605 4606 (face (rainbow-delimiters-depth-5-face) fontified t) 4606 4607 (face (rainbow-delimiters-depth-5-face) fontified t) 4607 4608 (face (rainbow-delimiters-depth-4-face) fontified t) 4608 4766 (fontified t) 4766 4767 (face (rainbow-delimiters-depth-4-face) fontified t) 4767 4777 (fontified t) 4777 4778 (face (rainbow-delimiters-depth-4-face) fontified t) 4778 4781 (fontified t) 4781 4782 (face (rainbow-delimiters-depth-4-face) fontified t) 4782 4792 (fontified t) 4792 4793 (face (rainbow-delimiters-depth-4-face) fontified t) 4793 4799 (fontified t) 4799 4800 (face (rainbow-delimiters-depth-4-face) fontified t) 4800 4814 (fontified t) 4814 4815 (face (rainbow-delimiters-depth-4-face) fontified t) 4815 4822 (fontified t) 4822 4823 (face (rainbow-delimiters-depth-4-face) fontified t) 4823 4833 (fontified t) 4833 4834 (face (rainbow-delimiters-depth-4-face) fontified t) 4834 4876 (fontified t) 4876 4877 (face (rainbow-delimiters-depth-4-face) fontified t) 4877 4885 (fontified t) 4885 4886 (face (rainbow-delimiters-depth-4-face) fontified t) 4886 4890 (fontified t) 4890 4891 (face (rainbow-delimiters-depth-4-face) fontified t) 4891 4901 (fontified t) 4901 4902 (face (rainbow-delimiters-depth-4-face) fontified t) 4902 4908 (fontified t) 4908 4909 (face (rainbow-delimiters-depth-4-face) fontified t) 4909 4919 (fontified t) 4919 4920 (face (rainbow-delimiters-depth-4-face) fontified t) 4920 4926 (fontified t) 4926 4927 (face (rainbow-delimiters-depth-4-face) fontified t) 4927 4939 (fontified t) 4939 4940 (face (rainbow-delimiters-depth-4-face) fontified t) 4940 4987 (fontified t) 4987 4988 (face (rainbow-delimiters-depth-4-face) fontified t) 4988 4999 (fontified t) 4999 5000 (face (rainbow-delimiters-depth-4-face) fontified t) 5000 5007 (fontified t) 5007 5008 (face (rainbow-delimiters-depth-4-face) fontified t) 5008 5023 (fontified t) 5023 5024 (face (rainbow-delimiters-depth-4-face) fontified t) 5024 5821 (fontified t)) . 37965) (undo-tree-id196 . -5797) (undo-tree-id197 . -5820) (undo-tree-id198 . -5797) (t 26030 44523 515991 283000)) nil (26030 44909 70358 0) 0 nil])
+([nil nil ((#("# foreground #dddddd
+# background #000000
+
+#: The foreground and background colors.
+
+# background_opacity 1.0
+
+#: The opacity of the background. A number between zero and one, where
+#: one is opaque and zero is fully transparent. This will only work if
+#: supported by the OS (for instance, when using a compositor under
+#: X11). Note that it only sets the background color's opacity in
+#: cells that have the same background color as the default terminal
+#: background, so that things like the status bar in vim, powerline
+#: prompts, etc. still look good. But it means that if you use a color
+#: theme with a background color in your editor, it will not be
+#: rendered as transparent. Instead you should change the default
+#: background color in your kitty config and not use a background
+#: color in the editor color scheme. Or use the escape codes to set
+#: the terminals default colors in a shell script to launch your
+#: editor. Be aware that using a value less than 1.0 is a (possibly
+#: significant) performance hit. When using a low value for this
+#: setting, it is desirable that you set the background color to a
+#: color the matches the general color of the desktop background, for
+#: best text rendering.  If you want to dynamically change
+#: transparency of windows, set dynamic_background_opacity to yes
+#: (this is off by default as it has a performance cost). Changing
+#: this option when reloading the config will only work if
+#: dynamic_background_opacity was enabled in the original config.
+
+# background_blur 0
+
+#: Set to a positive value to enable background blur (blurring of the
+#: visuals behind a transparent window) on platforms that support it.
+#: Only takes effect when background_opacity is less than one. On
+#: macOS, this will also control the blur radius (amount of blurring).
+#: Setting it to too high a value will cause severe performance issues
+#: and/or rendering artifacts. Usually, values up to 64 work well.
+#: Note that this might cause performance issues, depending on how the
+#: platform implements it, so use with care. Currently supported on
+#: macOS and KDE under X11.
+
+# background_image none
+
+#: Path to a background image. Must be in PNG format.
+
+# background_image_layout tiled
+
+#: Whether to tile, scale or clamp the background image. The value can
+#: be one of tiled, mirror-tiled, scaled, clamped, centered or
+#: cscaled. The scaled and cscaled values scale the image to the
+#: window size, with cscaled preserving the image aspect ratio.
+
+# background_image_linear no
+
+#: When background image is scaled, whether linear interpolation
+#: should be used.
+
+# dynamic_background_opacity no
+
+#: Allow changing of the background_opacity dynamically, using either
+#: keyboard shortcuts (increase_background_opacity and
+#: decrease_background_opacity) or the remote control facility.
+#: Changing this option by reloading the config is not supported.
+
+# background_tint 0.0
+
+#: How much to tint the background image by the background color. This
+#: option makes it easier to read the text. Tinting is done using the
+#: current background color for each window. This option applies only
+#: if background_opacity is set and transparent windows are supported
+#: or background_image is set.
+
+# background_tint_gaps 1.0
+
+#: How much to tint the background image at the window gaps by the
+#: background color, after applying background_tint. Since this is
+#: multiplicative with background_tint, it can be used to lighten the
+#: tint over the window gaps for a *separated* look.
+
+# dim_opacity 0.4
+
+#: How much to dim text that has the DIM/FAINT attribute set. One
+#: means no dimming and zero means fully dimmed (i.e. invisible).
+
+# selection_foreground #000000
+# selection_background #fffacd
+
+#: The foreground and background colors for text selected with the
+#: mouse. Setting both of these to none will cause a \"reverse video\"
+#: effect for selections, where the selection will be the cell text
+#: color and the text will become the cell background color. Setting
+#: only selection_foreground to none will cause the foreground color
+#: to be used unchanged. Note that these colors can be overridden by
+#: the program running in the terminal.
+
+#: The color table {{{
+
+#: The 256 terminal colors. There are 8 basic colors, each color has a
+#: dull and bright version, for the first 16 colors. You can set the
+#: remaining 240 colors as color16 to color255.
+
+# color0 #000000
+# color8 #767676
+
+#: black
+
+# color1 #cc0403
+# color9 #f2201f
+
+#: red
+
+# color2  #19cb00
+# color10 #23fd00
+
+#: green
+
+# color3  #cecb00
+# color11 #fffd00
+
+#: yellow
+
+# color4  #0d73cc
+# color12 #1a8fff
+
+#: blue
+
+# color5  #cb1ed1
+# color13 #fd28ff
+
+#: magenta
+
+# color6  #0dcdcd
+# color14 #14ffff
+
+#: cyan
+
+# color7  #dddddd
+# color15 #ffffff
+
+#: white
+
+# mark1_foreground black
+
+#: Color for marks of type 1
+
+# mark1_background #98d3cb
+
+#: Color for marks of type 1 (light steel blue)
+
+# mark2_foreground black
+
+#: Color for marks of type 2
+
+# mark2_background #f2dcd3
+
+#: Color for marks of type 1 (beige)
+
+# mark3_foreground black
+
+#: Color for marks of type 3
+
+# mark3_background #f274bc
+
+#: Color for marks of type 3 (violet)
+
+#: }}}
+
+#: }}}
+" 0 276 (fontified t) 276 277 (face (rainbow-delimiters-depth-4-face) fontified t) 277 327 (fontified t) 327 328 (face (rainbow-delimiters-depth-4-face) fontified t) 328 982 (fontified t) 982 983 (face (rainbow-delimiters-depth-4-face) fontified t) 983 1006 (fontified t) 1006 1007 (face (rainbow-delimiters-depth-4-face) fontified t) 1007 1322 (fontified t) 1322 1323 (face (rainbow-delimiters-depth-4-face) fontified t) 1323 1374 (fontified t) 1374 1375 (face (rainbow-delimiters-depth-4-face) fontified t) 1375 1471 (fontified t) 1471 1511 (fontified t) 1511 1586 (fontified t) 1586 1587 (face (rainbow-delimiters-depth-4-face) fontified t) 1587 1641 (fontified t) 1641 1642 (face (rainbow-delimiters-depth-4-face) fontified t) 1642 1788 (fontified t) 1788 1789 (face (rainbow-delimiters-depth-4-face) fontified t) 1789 1807 (fontified t) 1807 1808 (face (rainbow-delimiters-depth-4-face) fontified t) 1808 2733 (fontified t) 2733 2734 (face (rainbow-delimiters-depth-4-face) fontified t) 2734 2796 (fontified t) 2796 2797 (face (rainbow-delimiters-depth-4-face) fontified t) 2797 3011 (fontified t) 3011 3061 (fontified t) 3061 3652 (fontified t) 3652 3653 (face (rainbow-delimiters-depth-4-face) fontified t) 3653 3667 (fontified t) 3667 3668 (face (rainbow-delimiters-depth-4-face) fontified t) 3668 3854 (fontified t) 3854 3869 (face font-lock-string-face fontified t) 3869 4205 (fontified t) 4205 4206 (face (rainbow-delimiters-depth-4-face) fontified t) 4206 4207 (face (rainbow-delimiters-depth-5-face) fontified t) 4207 4208 (face (rainbow-delimiters-depth-6-face) fontified t) 4208 4561 (fontified t) 4561 4570 (fontified t) 4570 4883 (fontified t) 4883 4884 (face (rainbow-delimiters-depth-7-face) fontified t) 4884 4900 (fontified t) 4900 4901 (face (rainbow-delimiters-depth-7-face) fontified t) 4901 5016 (fontified t) 5016 5017 (face (rainbow-delimiters-depth-7-face) fontified t) 5017 5022 (fontified t) 5022 5023 (face (rainbow-delimiters-depth-7-face) fontified t) 5023 5138 (fontified t) 5138 5139 (face (rainbow-delimiters-depth-7-face) fontified t) 5139 5145 (fontified t) 5145 5146 (face (rainbow-delimiters-depth-7-face) fontified t) 5146 5151 (fontified t) 5151 5152 (face (rainbow-delimiters-depth-6-face) fontified t) 5152 5153 (face (rainbow-delimiters-depth-5-face) fontified t) 5153 5154 (face (rainbow-delimiters-depth-4-face) fontified t) 5154 5159 (fontified t) 5159 5160 (face (rainbow-delimiters-depth-3-face) fontified t) 5160 5161 (face (rainbow-delimiters-depth-2-face) fontified t) 5161 5162 (face (rainbow-delimiters-depth-1-face) fontified t) 5162 5163 (fontified t)) . 37995) (undo-tree-id191 . -5156) (undo-tree-id192 . -5162) (undo-tree-id193 . -5156) (undo-tree-id194 . -5081) (undo-tree-id195 . -5156) 43151) nil (26030 44909 70355 0) 0 nil])
+([nil nil ((#("#: Color scheme {{{
+" 0 16 (fontified t) 16 17 (face (rainbow-delimiters-depth-1-face) fontified t) 17 18 (face (rainbow-delimiters-depth-2-face) fontified t) 18 19 (face (rainbow-delimiters-depth-3-face) fontified t) 19 20 (fontified t)) . 37974) (undo-tree-id190 . -19)) nil (26030 44909 70352 0) 0 nil])
+([nil nil ((#("
+" 0 1 (fontified t)) . 37974) (undo-tree-id186 . -1) (undo-tree-id187 . -1) (undo-tree-id188 . -1) (undo-tree-id189 . -1)) nil (26030 44909 70351 0) 0 nil])
+([nil nil ((37965 . 37966) (37964 . 37965) 37950) nil (26030 44909 70347 0) 0 nil])
+([nil nil ((nil rear-nonsticky nil 37966 . 37967) (#("
+" 0 1 (fontified nil)) . -37967) (37966 . 37968)) nil (26030 44909 70345 0) 0 nil])
+([nil nil ((nil rear-nonsticky nil 38054 . 38055) (nil fontified nil 37966 . 38055) (37966 . 38055)) nil (26030 44909 70344 0) 0 nil])
+([nil current ((#("
+" 0 1 (fontified t)) . 38056) (undo-tree-id184 . 1) (undo-tree-id185 . -1)) nil (26030 44909 70340 0) 0 nil])
+nil
