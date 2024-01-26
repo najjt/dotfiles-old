@@ -3,9 +3,9 @@ Welcome to my dotfiles repository! It currently consists of the following compon
 * **Shell**: zsh
 * **Terminal**: kitty
 * **Editor**: Emacs
-* **Browser**: [&nearr;&nbsp;qutebrowser](gh-qutebrowser) & firefox
+* **Browser**: [&nearr;&nbsp;qutebrowser](https://github.com/qutebrowser/qutebrowser) & firefox
 * **OS**: macOS
-* **wm**: [&nearr;&nbsp;yabai](gh-yabai)
-* **statusbar**: [&nearr;&nbsp;sketchybar](gh-SketchyBar)
+* **wm**: [&nearr;&nbsp;yabai](https://github.com/koekeishiya/yabai)
+* **statusbar**: [&nearr;&nbsp;sketchybar](https://github.com/FelixKratz/SketchyBar)
 
 ![](resources/screenshot.png)
