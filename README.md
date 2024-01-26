@@ -6,4 +6,4 @@ Welcome to my dotfiles repository! It currently consists of the following compon
 * Editor: Emacs
 * Browser: qutebrowser & firefox
 
-![](screenshot.png)
+![](resources/screenshot.png)
