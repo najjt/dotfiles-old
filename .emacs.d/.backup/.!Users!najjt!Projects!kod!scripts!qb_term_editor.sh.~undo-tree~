@@ -1,7 +1,0 @@
-(undo-tree-save-format-version . 1)
-"166fb10a0eca4451fb4136948e47428ec4bbb740"
-[nil nil nil nil (26030 63482 13013 0) 0 nil]
-([nil nil ((nil rear-nonsticky nil 359 . 360) (nil fontified nil 1 . 360) (1 . 360) (t . -1)) nil (26030 63482 13011 0) 0 nil])
-([nil nil ((360 . 361) 359) nil (26030 63482 13006 0) 0 nil])
-([nil current ((181 . 186) (#("iTerm" 0 5 (face font-lock-string-face fontified t)) . 181) (undo-tree-id0 . -4) (undo-tree-id1 . -5) (undo-tree-id2 . -5) (t 26030 63482 16745 317000)) nil (26030 63643 385206 0) 0 nil])
-nil
