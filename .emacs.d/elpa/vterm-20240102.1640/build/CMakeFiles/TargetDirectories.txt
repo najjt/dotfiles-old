@@ -1,5 +1,0 @@
-/Users/najjt/.emacs.d/elpa/vterm-20240102.1640/build/CMakeFiles/vterm-module.dir
-/Users/najjt/.emacs.d/elpa/vterm-20240102.1640/build/CMakeFiles/libvterm.dir
-/Users/najjt/.emacs.d/elpa/vterm-20240102.1640/build/CMakeFiles/run.dir
-/Users/najjt/.emacs.d/elpa/vterm-20240102.1640/build/CMakeFiles/edit_cache.dir
-/Users/najjt/.emacs.d/elpa/vterm-20240102.1640/build/CMakeFiles/rebuild_cache.dir
