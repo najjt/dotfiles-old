@@ -77,6 +77,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (package-initialize)
 
+(use-package gnu-elpa-keyring-update)
+
 ;; ensure use-package is installed
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -502,6 +504,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-center-content t)
+  (setq dashboard-set-footer nil)
   (setq dashboard-display-icons-p nil))
 
 ;; set dashboard buffer as initial buffer choice
@@ -652,10 +655,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (use-package rainbow-delimiters
   :hook
   (prog-mode . (lambda () (rainbow-delimiters-mode))))
-
-(use-package indent-bars
-  :load-path "~/.emacs.d/elisp/indent-bars"
-  :hook (prog-mode . indent-bars-mode))
 
 (use-package lsp-java
   :after lsp-mode

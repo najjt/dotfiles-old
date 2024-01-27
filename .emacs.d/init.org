@@ -219,6 +219,13 @@ Set up MELPA, ELPA and Non-GNU ELPA and initialize the package manager.
   (package-initialize)
 
 #+end_src
+** GNU ELPA Keyring Update
+
+#+begin_src emacs-lisp
+
+(use-package gnu-elpa-keyring-update)
+
+#+end_src
 
 ** Use Package
 
@@ -873,6 +880,7 @@ The [[https://github.com/emacs-dashboard/emacs-dashboard][Dashboard]] package di
     :config
     (dashboard-setup-startup-hook)
     (setq dashboard-center-content t)
+    (setq dashboard-set-footer nil)
     (setq dashboard-display-icons-p nil))
 
   ;; set dashboard buffer as initial buffer choice
@@ -1094,18 +1102,6 @@ Match delimiters with [[https://github.com/Fanael/rainbow-delimiters][rainbow-de
   (use-package rainbow-delimiters
     :hook
     (prog-mode . (lambda () (rainbow-delimiters-mode))))
-
-#+end_src
-
-** Indentation
-
-[[https://github.com/jdtsmith/indent-bars][Indent Bars]].
-
-#+begin_src emacs-lisp
-
-  (use-package indent-bars
-    :load-path "~/.emacs.d/elisp/indent-bars"
-    :hook (prog-mode . indent-bars-mode))
 
 #+end_src
 
