@@ -746,7 +746,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (use-package org-super-agenda
   :after org-agenda
   :config
-  (org-super-agenda-mode)
+  (org-super-agenda-mode t)
   (setq org-super-agenda-groups
         '((:name "Schedule"
                  :time-grid t)
@@ -895,6 +895,27 @@ Triggered by a custom macOS Quick Action with a keyboard shortcut."
   :defer t
   :custom
   (org-plantuml-jar-path (expand-file-name "~/tools/plantuml/plantuml.jar")))
+
+(use-package mu4e
+  (setq mu4e-maildir "~/.mail"
+        mu4e-attachment-dir "~/Downloads")
+
+  (setq user-mail-address "mlonna@pm.me"
+        user-full-name  "Martin Lönn Andersson")
+
+  ;; Get mail
+  (setq mu4e-get-mail-command "mbsync protonmail"
+        mu4e-change-filenames-when-moving t   ; needed for mbsync
+        mu4e-update-interval 120)             ; update every 2 minutes
+
+  ;; Send mail
+  (setq message-send-mail-function 'smtpmail-send-it
+        smtpmail-auth-credentials "~/.authinfo.gpg"
+        smtpmail-smtp-server "127.0.0.1"
+        smtpmail-stream-type 'starttls
+        smtpmail-smtp-service 1025)
+
+  (add-to-list 'gnutls-trustfiles (expand-file-name "~/.config/protonmail/bridge/cert.pem")))
 
 ;; soft-wrap text
 (global-visual-line-mode t)
