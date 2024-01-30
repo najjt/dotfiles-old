@@ -734,6 +734,11 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
    '(org-agenda-date ((t (:height 1.0 :weight bold))))
    '(org-agenda-date-today ((t (:height 1.0 :weight bold)))))
 
+  ;; add newline above date heading
+  (setq org-agenda-format-date
+        (lambda (date)
+          (concat "\n" (org-agenda-format-date-aligned date))))
+
   ;; time grid settings
   (setq org-agenda-time-grid
     '((daily today require-timed remove-match)
@@ -745,18 +750,18 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (use-package org-super-agenda
   :after org-agenda
   :config
-  (org-super-agenda-mode t)
+  (org-super-agenda-mode)
   (setq org-super-agenda-groups
         '((:name "Schedule"
                  :time-grid t)
-          (:name "Vanor"
-                 :habit t)
+          (:name "Studier"
+                 :and (:category "studier" :deadline nil))
+          (:name "Privat"
+                 :and (:category ("privat" "capture" "computer") :deadline nil))
           (:name "Upcoming"
                  :deadline future)
-          (:name "Studier"
-                 :category "studier")
-          (:name "Privat"
-                 :category ("privat" "capture" "computer"))
+          (:name "Vanor"
+                 :habit t)
           (:discard (:anything t))))
   (org-agenda-list))
 
