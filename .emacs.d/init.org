@@ -233,7 +233,7 @@ A nicer way to set up packages with [[https://github.com/jwiegley/use-package][u
 
 ** Auto Package Update
 
-Automatically update packages every seven days with [[https://github.com/rranelli/auto-package-update.el][auto package update]].
+Automatically update packages every seven days with [[https://github.com/rranelli/auto-package-update.el][auto-package-update]].
 
 #+begin_src emacs-lisp
 
