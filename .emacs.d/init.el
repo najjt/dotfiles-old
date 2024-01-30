@@ -495,6 +495,10 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; relative line numbers
 (setq display-line-numbers-type 'relative)
 
+(setq frame-title-format '((:eval (if (buffer-file-name)
+                                      (abbreviate-file-name (buffer-file-name))
+                                    "%b"))))
+
 (use-package dashboard
   :demand
   :diminish (dashboard-mode page-break-lines-mode)

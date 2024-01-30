@@ -853,6 +853,16 @@ Popup buffers with [[https://github.com/karthink/popper][popper]].
 
 #+end_src
 
+** Title Bar
+
+#+begin_src emacs-lisp
+
+  (setq frame-title-format '((:eval (if (buffer-file-name)
+                                        (abbreviate-file-name (buffer-file-name))
+                                      "%b"))))
+
+#+end_src
+
 ** Dashboard
 
 The [[https://github.com/emacs-dashboard/emacs-dashboard][Dashboard]] package displays a customizable dashboard.
