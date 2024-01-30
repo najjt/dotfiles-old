@@ -21,6 +21,7 @@ alias kur="cd $KURSER"
 alias ec="emacsclient -c -n -a ''"
 
 # other
+alias cfg='/usr/bin/git --git-dir=/Users/najjt/.cfg/ --work-tree=/Users/najjt'
 alias x="exit"
 alias ..="cd .."
 alias ls='ls -lh --color=always'
@@ -31,4 +32,3 @@ alias python="python3"
 alias tmc="~/tools/tmc/tmc"
 
 export PATH="/opt/homebrew/bin:$PATH"
-alias config='/usr/bin/git --git-dir=/Users/najjt/.cfg/ --work-tree=/Users/najjt'
