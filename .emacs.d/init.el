@@ -109,6 +109,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (setq user-mail-address "mlonna@pm.me")
 
 (use-package exec-path-from-shell
+  :defer t
   :config
   ;; which environment variables to import
   (dolist (var '("LANG" "LC_ALL"))
@@ -127,14 +128,14 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :config
   (define-key swiper-map (kbd "C-h") 'delete-backward-char))
 
-(use-package markdown-mode)
+(use-package markdown-mode
+  :defer t)
 
 (use-package flyspell
   :diminish flyspell-mode
   :hook
-  ((markdown-mode org-mode text-mode) . flyspell-mode)
-  (prog-mode . flyspell-prog-mode)
-
+  (((markdown-mode org-mode text-mode) . flyspell-mode)
+   (prog-mode . flyspell-prog-mode))
   :config
   (general-define-key
    "C-l" 'flyspell-auto-correct-previous-word)
@@ -525,7 +526,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (use-package lsp-mode
   :commands lsp
-  :hook (java-mode . lsp-deferred)
+  :hook ((java-mode . lsp-deferred)
+         (tex-mode . lsp-deferred))
   :custom
   (lsp-keymap-prefix "C-c l")
   (lsp-auto-guess-root nil)
@@ -656,8 +658,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
 (use-package rainbow-delimiters
-  :hook
-  (prog-mode . (lambda () (rainbow-delimiters-mode))))
+  :hook (prog-mode . (lambda () (rainbow-delimiters-mode))))
 
 (use-package projectile
   :diminish projectile-mode

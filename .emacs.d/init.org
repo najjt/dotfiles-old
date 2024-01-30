@@ -282,6 +282,7 @@ Get environment variables from shell with [[https://github.com/purcell/exec-path
 #+begin_src emacs-lisp
 
   (use-package exec-path-from-shell
+    :defer t
     :config
     ;; which environment variables to import
     (dolist (var '("LANG" "LC_ALL"))
@@ -316,7 +317,8 @@ The [[https://jblevins.org/projects/markdown-mode/][markdown mode]] package prov
 
 #+begin_src emacs-lisp
 
-  (use-package markdown-mode)
+    (use-package markdown-mode
+      :defer t)
 
 #+end_src
 
@@ -329,9 +331,8 @@ To spell check files, I use =flyspell= and [[https://github.com/hunspell/hunspel
   (use-package flyspell
     :diminish flyspell-mode
     :hook
-    ((markdown-mode org-mode text-mode) . flyspell-mode)
-    (prog-mode . flyspell-prog-mode)
-
+    (((markdown-mode org-mode text-mode) . flyspell-mode)
+     (prog-mode . flyspell-prog-mode))
     :config
     (general-define-key
      "C-l" 'flyspell-auto-correct-previous-word)
@@ -911,7 +912,8 @@ Programming functionalities with [[https://github.com/emacs-lsp/lsp-mode][lsp-mo
 
   (use-package lsp-mode
     :commands lsp
-    :hook (java-mode . lsp-deferred)
+    :hook ((java-mode . lsp-deferred)
+           (tex-mode . lsp-deferred))
     :custom
     (lsp-keymap-prefix "C-c l")
     (lsp-auto-guess-root nil)
@@ -1011,8 +1013,7 @@ Programming functionalities with [[https://github.com/emacs-lsp/lsp-mode][lsp-mo
 
 #+end_src
 
-** Syntax
-*** Flycheck
+** Flycheck
 
 A syntax checking extension.
 
@@ -1097,8 +1098,7 @@ Match delimiters with [[https://github.com/Fanael/rainbow-delimiters][rainbow-de
 #+begin_src emacs-lisp
 
   (use-package rainbow-delimiters
-    :hook
-    (prog-mode . (lambda () (rainbow-delimiters-mode))))
+    :hook (prog-mode . (lambda () (rainbow-delimiters-mode))))
 
 #+end_src
 
@@ -1517,9 +1517,8 @@ PlantUML Mode, a major mode for editing PlantUML sources.
     (org-plantuml-jar-path (expand-file-name "~/tools/plantuml/plantuml.jar")))
 
 #+end_src
+
 ** Mail
-
-
 
 #+begin_src emacs-lisp
 
@@ -1599,7 +1598,7 @@ PlantUML Mode, a major mode for editing PlantUML sources.
 
 #+end_src
 
-* Tangle & Reload on Save
+* Tangle & Reload On Save
 
 These hooks will ask to tangle all code blocks and reload configuration on save.
 
