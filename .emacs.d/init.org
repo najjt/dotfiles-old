@@ -45,8 +45,6 @@ Every file opened and loaded by Emacs will run through this list to check for a 
 
 It will be faster to disable them here before they've been initialized.
 
-Hide window decorations (title bar) and set rounded corners on macOS.
-
 #+begin_src emacs-lisp :tangle ./early-init.el
 
   (setq inhibit-startup-message t)
@@ -56,10 +54,6 @@ Hide window decorations (title bar) and set rounded corners on macOS.
   (tool-bar-mode -1)
   (blink-cursor-mode -1)
   (set-fringe-mode 0)
-
-  (when (eq system-type 'darwin)
-    (add-to-list 'default-frame-alist '(undecorated-round . t))
-    (setq frame-resize-pixelwise t))
 
 #+end_src
 
