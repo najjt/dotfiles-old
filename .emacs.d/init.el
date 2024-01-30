@@ -77,8 +77,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (package-initialize)
 
-(use-package gnu-elpa-keyring-update)
-
 ;; ensure use-package is installed
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)

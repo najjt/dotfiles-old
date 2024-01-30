@@ -219,14 +219,6 @@ Set up MELPA, ELPA and Non-GNU ELPA and initialize the package manager.
   (package-initialize)
 
 #+end_src
-** GNU ELPA Keyring Update
-
-#+begin_src emacs-lisp
-
-(use-package gnu-elpa-keyring-update)
-
-#+end_src
-
 ** Use Package
 
 A nicer way to set up packages with [[https://github.com/jwiegley/use-package][use-package]]. Make sure =use-package= is installed, refresh package contents, always ensure packages are installed and turn on verbose logging.
