@@ -109,7 +109,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (setq user-mail-address "mlonna@pm.me")
 
 (use-package exec-path-from-shell
-  :defer t
   :config
   ;; which environment variables to import
   (dolist (var '("LANG" "LC_ALL"))
@@ -504,7 +503,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :demand
   :diminish (dashboard-mode page-break-lines-mode)
   :custom
-  (dashboard-items '((bookmarks . 7)))
+  (dashboard-items '((bookmarks . 7)
+                     (projects . 5)))
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-center-content t)
@@ -545,20 +545,22 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
   :bind (:map lsp-mode-map ("C-c C-f" . lsp-format-buffer))
   :config
+  (setq lsp-headerline-breadcrumb-icons-enable nil)
+  (setq lsp-modeline-code-action-fallback-icon "[A]")
+
   (defun lsp-update-server ()
     "Update LSP server."
     (interactive)
     ;; equals to `C-u M-x lsp-install-server'
     (lsp-install-server t))
-  (setq lsp-headerline-breadcrumb-icons-enable nil)
-  (setq lsp-modeline-code-action-fallback-icon "[A]"))
 
-;; ivy integration
-(use-package lsp-ivy)
+  ;; ivy integration
+  (use-package lsp-ivy
+    :after lsp)
 
-;; treemacs integration
-(use-package lsp-treemacs
-  :after lsp)
+  ;; treemacs integration
+  (use-package lsp-treemacs
+    :after lsp))
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
@@ -585,10 +587,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   ;; use lsp-ui-doc-webkit only in GUI
   (when (display-graphic-p)
     (setq lsp-ui-doc-use-webkit t))
-  ;; WORKAROUND Hide mode-line of the lsp-ui-imenu buffer
-  ;; https://github.com/emacs-lsp/lsp-ui/issues/243
-  (defadvice lsp-ui-imenu (after hide-lsp-ui-imenu-mode-line activate)
-    (setq mode-line-format nil))
   ;; `C-g'to close doc
   (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide))
 
@@ -731,12 +729,21 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   (setq org-startup-folded t)
   (setq org-export-backends '(md org ascii html icalendar latex odt rss))
 
+  (defun my/org-insert-heading-at-point ()
+    "Insert a new heading at the current line in Org mode."
+    (interactive)
+    (org-insert-heading)
+    (org-metaright))
+
+  (define-key org-mode-map (kbd "M-RET") 'my/org-insert-heading-at-point)
+
   ;; remap org indentation keys
   (with-eval-after-load 'org
     (general-define-key
      :keymaps 'org-mode-map
      "C-c i" 'org-metaright
-     "C-c u" 'org-metaleft)))
+     "C-c u" 'org-metaleft
+     "M-RET" 'my/org-insert-heading-at-point)))
 
 (use-package org-agenda
   :ensure nil
@@ -837,44 +844,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
      ("mw" "Web Capture" entry (file+headline "backlog.org" "Web")
   "* %i\n%U\n\n"))))
-
-(when *sys/mac*
-  (use-package org-mac-link)
-  (use-package noflet))
-
-(defun timu-func-url-qutebrowser-capture-to-org ()
-  "Call `org-capture-string' on the current frontmost qutebrowser window.
-Use `org-mac-link-qutebrowser-get-frontmost-url' to capture URL from qutebrowser.
-Triggered by a custom macOS Quick Action with a keyboard shortcut."
-  (interactive)
-  (org-capture-string (org-mac-link-qutebrowser-get-frontmost-url) "mw")
-  (ignore-errors)
-  (org-capture-finalize))
-
-(defun timu-func-make-capture-frame ()
-  "Create a new frame and run `org-capture'."
-  (interactive)
-  (make-frame '((name . "capture")
-                (top . 300)
-                (left . 700)
-                (width . 80)
-                (height . 25)))
-  (select-frame-by-name "capture")
-  (delete-other-windows)
-  (noflet ((switch-to-buffer-other-window (buf) (switch-to-buffer buf)))
-    (org-capture)))
-
-(defadvice org-capture-finalize
-    (after delete-capture-frame activate)
-  "Advise capture-finalize to close the frame."
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-frame)))
-
-(defadvice org-capture-destroy
-    (after delete-capture-frame activate)
-  "Advise capture-destroy to close the frame."
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-frame)))
 
 (use-package org-habit
   :ensure nil

@@ -282,7 +282,6 @@ Get environment variables from shell with [[https://github.com/purcell/exec-path
 #+begin_src emacs-lisp
 
   (use-package exec-path-from-shell
-    :defer t
     :config
     ;; which environment variables to import
     (dolist (var '("LANG" "LC_ALL"))
@@ -870,25 +869,26 @@ The [[https://github.com/emacs-dashboard/emacs-dashboard][Dashboard]] package di
 
 #+begin_src emacs-lisp
 
-  (use-package dashboard
-    :demand
-    :diminish (dashboard-mode page-break-lines-mode)
-    :custom
-    (dashboard-items '((bookmarks . 7)))
-    :config
-    (dashboard-setup-startup-hook)
-    (setq dashboard-center-content t)
-    (setq dashboard-set-footer nil)
-    (setq dashboard-display-icons-p nil))
+    (use-package dashboard
+      :demand
+      :diminish (dashboard-mode page-break-lines-mode)
+      :custom
+      (dashboard-items '((bookmarks . 7)
+                         (projects . 5)))
+      :config
+      (dashboard-setup-startup-hook)
+      (setq dashboard-center-content t)
+      (setq dashboard-set-footer nil)
+      (setq dashboard-display-icons-p nil))
 
-  ;; set dashboard buffer as initial buffer choice
-  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+    ;; set dashboard buffer as initial buffer choice
+    (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
-  ;; hook dashboard-open to creation of new frame
-  (add-hook 'after-make-frame-functions
-          (lambda (frame)
-            (with-selected-frame frame
-              (dashboard-open))))
+    ;; hook dashboard-open to creation of new frame
+    (add-hook 'after-make-frame-functions
+            (lambda (frame)
+              (with-selected-frame frame
+                (dashboard-open))))
 
 
 #+end_src
@@ -931,26 +931,22 @@ Programming functionalities with [[https://github.com/emacs-lsp/lsp-mode][lsp-mo
 
     :bind (:map lsp-mode-map ("C-c C-f" . lsp-format-buffer))
     :config
+    (setq lsp-headerline-breadcrumb-icons-enable nil)
+    (setq lsp-modeline-code-action-fallback-icon "[A]")
+
     (defun lsp-update-server ()
       "Update LSP server."
       (interactive)
       ;; equals to `C-u M-x lsp-install-server'
       (lsp-install-server t))
-    (setq lsp-headerline-breadcrumb-icons-enable nil)
-    (setq lsp-modeline-code-action-fallback-icon "[A]"))
 
-#+end_src
+    ;; ivy integration
+    (use-package lsp-ivy
+      :after lsp)
 
-**** LSP Mode Integrations
-
-#+begin_src emacs-lisp
-
-  ;; ivy integration
-  (use-package lsp-ivy)
-
-  ;; treemacs integration
-  (use-package lsp-treemacs
-    :after lsp)
+    ;; treemacs integration
+    (use-package lsp-treemacs
+      :after lsp))
 
 #+end_src
 
@@ -960,37 +956,33 @@ Programming functionalities with [[https://github.com/emacs-lsp/lsp-mode][lsp-mo
 
 #+begin_src emacs-lisp
 
-    (use-package lsp-ui
-      :hook (lsp-mode . lsp-ui-mode)
-      :after lsp-mode
-      :diminish
-      :commands lsp-ui-mode
-      :custom-face
-      (lsp-ui-doc-background ((t (:background nil))))
-      (lsp-ui-doc-header ((t (:inherit (font-lock-string-face italic)))))
-      :bind
-      (:map lsp-ui-mode-map
-            ("M-r" . lsp-ui-peek-find-definitions)
-            ("M-?" . lsp-ui-peek-find-references)
-            ("C-c u" . lsp-ui-imenu)
-            ("M-i" . lsp-ui-doc-focus-frame))
-      :custom
-      (lsp-ui-doc-header t)
-      (lsp-ui-doc-include-signature t)
-      (lsp-ui-doc-border (face-foreground 'default))
-      (lsp-ui-sideline-enable nil)
-      (lsp-ui-sideline-ignore-duplicate t)
-      (lsp-ui-sideline-show-code-actions nil)
-      :config
-      ;; use lsp-ui-doc-webkit only in GUI
-      (when (display-graphic-p)
-        (setq lsp-ui-doc-use-webkit t))
-      ;; WORKAROUND Hide mode-line of the lsp-ui-imenu buffer
-      ;; https://github.com/emacs-lsp/lsp-ui/issues/243
-      (defadvice lsp-ui-imenu (after hide-lsp-ui-imenu-mode-line activate)
-        (setq mode-line-format nil))
-      ;; `C-g'to close doc
-      (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide))
+  (use-package lsp-ui
+    :hook (lsp-mode . lsp-ui-mode)
+    :after lsp-mode
+    :diminish
+    :commands lsp-ui-mode
+    :custom-face
+    (lsp-ui-doc-background ((t (:background nil))))
+    (lsp-ui-doc-header ((t (:inherit (font-lock-string-face italic)))))
+    :bind
+    (:map lsp-ui-mode-map
+          ("M-r" . lsp-ui-peek-find-definitions)
+          ("M-?" . lsp-ui-peek-find-references)
+          ("C-c u" . lsp-ui-imenu)
+          ("M-i" . lsp-ui-doc-focus-frame))
+    :custom
+    (lsp-ui-doc-header t)
+    (lsp-ui-doc-include-signature t)
+    (lsp-ui-doc-border (face-foreground 'default))
+    (lsp-ui-sideline-enable nil)
+    (lsp-ui-sideline-ignore-duplicate t)
+    (lsp-ui-sideline-show-code-actions nil)
+    :config
+    ;; use lsp-ui-doc-webkit only in GUI
+    (when (display-graphic-p)
+      (setq lsp-ui-doc-use-webkit t))
+    ;; `C-g'to close doc
+    (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide))
 
 #+end_src
 
@@ -1199,11 +1191,10 @@ AUCTeX, an extensible package for writing and formatting TeX files. It supports 
                   (setq TeX-source-correlate-start-server t))))
 
 #+end_src
-* Organisation
+* Office
+** Org Mode
 
 I organize my life with [[https://orgmode.org/][Org Mode]]. The following headers all add and modify Org Mode's functionalities.
-
-** Org Mode
 
 #+begin_src emacs-lisp
 
@@ -1221,12 +1212,21 @@ I organize my life with [[https://orgmode.org/][Org Mode]]. The following header
     (setq org-startup-folded t)
     (setq org-export-backends '(md org ascii html icalendar latex odt rss))
 
+    (defun my/org-insert-heading-at-point ()
+      "Insert a new heading at the current line in Org mode."
+      (interactive)
+      (org-insert-heading)
+      (org-metaright))
+
+    (define-key org-mode-map (kbd "M-RET") 'my/org-insert-heading-at-point)
+
     ;; remap org indentation keys
     (with-eval-after-load 'org
       (general-define-key
        :keymaps 'org-mode-map
        "C-c i" 'org-metaright
-       "C-c u" 'org-metaleft)))
+       "C-c u" 'org-metaleft
+       "M-RET" 'my/org-insert-heading-at-point)))
 
 #+end_src
 
@@ -1354,66 +1354,6 @@ I organize my life with [[https://orgmode.org/][Org Mode]]. The following header
 
 #+end_src
 
-**** Capture from anywhere on macOS
-
-Using ~org-mac-link~, Applescript and Karabiner, ~org-capture~ can be run from outside Emacs (source: [[https://macowners.club/posts/org-capture-from-everywhere-macos/][Org capture from everywhere in macOS]]).
-
-First, we make sure the dependencies ~org-mac-link~ and ~noflet~ are installed.
-
-#+begin_src emacs-lisp
-
-  (when *sys/mac*
-    (use-package org-mac-link)
-    (use-package noflet))
-
-#+end_sRc
-
-This function captures the current frontmost qutebrowser window.
-
-#+begin_src emacs-lisp
-
-  (defun timu-func-url-qutebrowser-capture-to-org ()
-    "Call `org-capture-string' on the current frontmost qutebrowser window.
-  Use `org-mac-link-qutebrowser-get-frontmost-url' to capture URL from qutebrowser.
-  Triggered by a custom macOS Quick Action with a keyboard shortcut."
-    (interactive)
-    (org-capture-string (org-mac-link-qutebrowser-get-frontmost-url) "mw")
-    (ignore-errors)
-    (org-capture-finalize))
-
-#+end_sRc
-
-Function and advice to create and destroy a capture frame.
-
-#+begin_src emacs-lisp
-
-  (defun timu-func-make-capture-frame ()
-    "Create a new frame and run `org-capture'."
-    (interactive)
-    (make-frame '((name . "capture")
-                  (top . 300)
-                  (left . 700)
-                  (width . 80)
-                  (height . 25)))
-    (select-frame-by-name "capture")
-    (delete-other-windows)
-    (noflet ((switch-to-buffer-other-window (buf) (switch-to-buffer buf)))
-      (org-capture)))
-
-  (defadvice org-capture-finalize
-      (after delete-capture-frame activate)
-    "Advise capture-finalize to close the frame."
-    (if (equal "capture" (frame-parameter nil 'name))
-        (delete-frame)))
-
-  (defadvice org-capture-destroy
-      (after delete-capture-frame activate)
-    "Advise capture-destroy to close the frame."
-    (if (equal "capture" (frame-parameter nil 'name))
-        (delete-frame)))
-
-#+end_src
-
 *** Org Habit
 
 [[https://orgmode.org/manual/Tracking-your-habits.html][Org Habit]] gives the ability to track habits.
@@ -1499,7 +1439,6 @@ Load [[https://www.emacswiki.org/emacs/sv-kalender.el][Swedish calendar]].
 
 #+end_src
 
-* Office
 ** PlantUML & Graphviz
 
 PlantUML Mode, a major mode for editing PlantUML sources.
