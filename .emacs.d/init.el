@@ -718,6 +718,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (use-package org-agenda
   :ensure nil
   :after org
+  :hook (org-agenda-mode . org-super-agenda-mode)
   :config
   (setq org-agenda-span 'day)
   (setq org-agenda-tags-column 0)
@@ -750,7 +751,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (use-package org-super-agenda
   :after org-agenda
   :config
-  (org-super-agenda-mode)
   (setq org-super-agenda-groups
         '((:name "Schedule"
                  :time-grid t)

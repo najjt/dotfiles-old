@@ -6,7 +6,7 @@
 
 Welcome to my Emacs configuration. This is a literate configuration, meaning code and prose are intertwined in order to provide clear documentation. [[https://orgmode.org/worg/org-contrib/babel/][Org Babel]] makes this possible in =org= files, like this one.
 
-This setup is heavily inspired by [[https://github.com/MatthewZMD/.emacs.d][M-EMACS]] by [[https://github.com/MatthewZMD][Matthew Zeng]].
+This setup is heavily inspired by [[https://github.com/MatthewZMD/.emacs.d][Matthew Zeng's Emacs setup]].
 
 * Startup
 ** Early Init
@@ -1203,6 +1203,7 @@ I organize my life with [[https://orgmode.org/][Org Mode]]. The following header
   (use-package org-agenda
     :ensure nil
     :after org
+    :hook (org-agenda-mode . org-super-agenda-mode)
     :config
     (setq org-agenda-span 'day)
     (setq org-agenda-tags-column 0)
@@ -1240,23 +1241,22 @@ I organize my life with [[https://orgmode.org/][Org Mode]]. The following header
 
 #+begin_src emacs-lisp
 
-        (use-package org-super-agenda
-          :after org-agenda
-          :config
-          (org-super-agenda-mode)
-          (setq org-super-agenda-groups
-                '((:name "Schedule"
-                         :time-grid t)
-                  (:name "Studier"
-                         :and (:category "studier" :deadline nil))
-                  (:name "Privat"
-                         :and (:category ("privat" "capture" "computer") :deadline nil))
-                  (:name "Upcoming"
-                         :deadline future)
-                  (:name "Vanor"
-                         :habit t)
-                  (:discard (:anything t))))
-          (org-agenda-list))
+  (use-package org-super-agenda
+    :after org-agenda
+    :config
+    (setq org-super-agenda-groups
+          '((:name "Schedule"
+                   :time-grid t)
+            (:name "Studier"
+                   :and (:category "studier" :deadline nil))
+            (:name "Privat"
+                   :and (:category ("privat" "capture" "computer") :deadline nil))
+            (:name "Upcoming"
+                   :deadline future)
+            (:name "Vanor"
+                   :habit t)
+            (:discard (:anything t))))
+    (org-agenda-list))
 
 #+end_src
 
