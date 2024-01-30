@@ -8,9 +8,5 @@
 (blink-cursor-mode -1)
 (set-fringe-mode 0)
 
-(when (eq system-type 'darwin)
-  (add-to-list 'default-frame-alist '(undecorated-round . t))
-  (setq frame-resize-pixelwise t))
-
 (require 'server)
 (if (not (server-running-p)) (server-start))
