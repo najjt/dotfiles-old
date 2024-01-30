@@ -722,7 +722,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (use-package org-agenda
   :ensure nil
   :after org
-  :hook (org-agenda-mode . org-super-agenda-mode)
   :config
   (setq org-agenda-span 'day)
   (setq org-agenda-tags-column 0)
@@ -755,19 +754,25 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (use-package org-super-agenda
   :after org-agenda
   :config
-  (setq org-super-agenda-groups
-        '((:name "Schedule"
-                 :time-grid t)
-          (:name "Studier"
-                 :and (:category "studier" :deadline nil))
-          (:name "Privat"
-                 :and (:category ("privat" "capture" "computer") :deadline nil))
-          (:name "Upcoming"
-                 :deadline future)
-          (:name "Vanor"
-                 :habit t)
-          (:discard (:anything t))))
-  (org-agenda-list))
+  (org-super-agenda-mode)
+
+  ;; only apply super agenda groups on org-agenda-list
+  (defun my-org-agenda-list (orig-fun &rest args)
+    (let ((org-super-agenda-groups
+           '((:name "Schedule"
+                    :time-grid t)
+             (:name "Studier"
+                    :and (:category "studier" :deadline nil))
+             (:name "Privat"
+                    :and (:category ("privat" "capture" "computer") :deadline nil))
+             (:name "Upcoming Deadlines"
+                    :deadline future)
+             (:name "Vanor"
+                    :habit t)
+             (:discard (:anything t)))))
+      (apply orig-fun args)))
+
+  (advice-add 'org-agenda-list :around #'my-org-agenda-list))
 
 (use-package org-capture
   :ensure nil
