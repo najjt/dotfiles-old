@@ -480,8 +480,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
       "^\\*shell.*\\*$"  shell-mode
       "^\\*term.*\\*$"   term-mode
       "^\\*vterm.*\\*$"  vterm-mode
-      "^\\*ansi-term.*\\*$"  ansi-term-mode)
-    )
+      "^\\*ansi-term.*\\*$"  ansi-term-mode
+      "^\\*helpful.*\\*$" helpful-mode))
   (popper-mode +1)
   (popper-echo-mode +1)
   (setq popper-mode-line " POP ")
