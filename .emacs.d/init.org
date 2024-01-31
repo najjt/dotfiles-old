@@ -1423,31 +1423,37 @@ Calendar framework with [[https://github.com/kiwanami/emacs-calfw][calfw]]. [[ht
 #+begin_src emacs-lisp
 
   (use-package calfw
-    :bind ("C-c o" . my/custom-org-calendar)
     :config
-    (use-package calfw-org) ; integrate calfw with org
+    ;; integrate calfw with org
+    (use-package calfw-org
+      :after calfw)
 
-    (use-package calfw-blocks ; visual time blocks
+    ;; visual time blocks
+    (use-package calfw-blocks
       :ensure nil
-      :load-path ("calfw-blocks")
-      :bind (:map cfw:calendar-mode-map
-                  ("b" . calfw-blocks-change-view-block-week)
+      :demand t
+      :after calfw
+      :load-path ("~/.emacs.d/elisp/calfw-blocks")
+      :bind ((:map cfw:calendar-mode-map
+                  ("w" . calfw-blocks-change-view-block-week)
                   ("t" . calfw-blocks-change-view-transpose-two-weeks))
+             ("C-c o" . my/custom-open-calendar))
       :config
       (setq calfw-blocks-earliest-visible-time '(7 0))
       (setq calfw-blocks-default-event-length 1)
       (setq calfw-blocks-lines-per-hour 2))
 
+    ;; use swedish calendar
+    (load "sv-kalender")
+
     ;; open calendar with two weeks view
-    (defun my/custom-org-calendar ()
+    (defun my/custom-open-calendar ()
       (interactive)
       (cfw:open-calendar-buffer
        :contents-sources
        (list
         (cfw:org-create-source "medium purple"))
-       :view 'block-week))
-
-    (load "sv-kalender")) ; use swedish calendar
+       :view 'block-week)))
 
 #+end_src
 
