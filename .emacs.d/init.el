@@ -3,13 +3,13 @@
 (defvar file-name-handler-alist-original file-name-handler-alist)
 (setq file-name-handler-alist nil)
 
-(defvar better-gc-cons-threshold 419430400; 512mb
+(defvar better-gc-cons-threshold 4294967269; 512mb
   "The default value to use for `gc-cons-threshold'.
 
 If you experience freezing, decrease this.  If you experience stuttering, increase this.")
 
 (add-hook 'emacs-startup-hook
-      (lambda () (setq gc-cons-threshold better-gc-cons-threshold)))
+          (lambda () (setq gc-cons-threshold better-gc-cons-threshold)))
 
 (add-hook 'emacs-startup-hook
       (lambda ()
@@ -115,7 +115,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
     (add-to-list 'exec-path-from-shell-variables var))
 
   ;; activate exec-path-from-shell on macos and linux
-  (when (memq window-system '(mac ns x))
+  (when (or *sys/linux* *sys/mac*)
     (exec-path-from-shell-initialize))
 
   ;; activate exec-path-from-shell when emacs is launched as daemon
@@ -932,6 +932,17 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
    mu4e-confirm-quit nil
    mu4e-compose-format-flowed t ; re-flow mail so it's not hard wrapped
    ))
+
+(use-package pdf-tools-install
+  :ensure pdf-tools
+  :if (display-graphic-p)
+  :mode "\\.pdf\\'"
+  :commands (pdf-loader-install)
+  :custom
+  (TeX-view-program-selection '((output-pdf "pdf-tools")))
+  (TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
+  :config
+  (pdf-loader-install))
 
 ;; soft-wrap text
 (global-visual-line-mode t)
