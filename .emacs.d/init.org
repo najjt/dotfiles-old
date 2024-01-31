@@ -869,26 +869,27 @@ The [[https://github.com/emacs-dashboard/emacs-dashboard][Dashboard]] package di
 
 #+begin_src emacs-lisp
 
-    (use-package dashboard
-      :demand
-      :diminish (dashboard-mode page-break-lines-mode)
-      :custom
-      (dashboard-items '((bookmarks . 7)
-                         (projects . 5)))
-      :config
-      (dashboard-setup-startup-hook)
-      (setq dashboard-center-content t)
-      (setq dashboard-set-footer nil)
-      (setq dashboard-display-icons-p nil))
+      (use-package dashboard
+        :demand
+        :diminish (dashboard-mode page-break-lines-mode)
+        :custom
+        (dashboard-items '((bookmarks . 7)
+                           (projects . 5)
+                           (recents . 4)))
+        :config
+        (dashboard-setup-startup-hook)
+        (setq dashboard-center-content t)
+        (setq dashboard-set-footer nil)
+        (setq dashboard-display-icons-p nil))
 
-    ;; set dashboard buffer as initial buffer choice
-    (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+      ;; set dashboard buffer as initial buffer choice
+      (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
-    ;; hook dashboard-open to creation of new frame
-    (add-hook 'after-make-frame-functions
-            (lambda (frame)
-              (with-selected-frame frame
-                (dashboard-open))))
+      ;; hook dashboard-open to creation of new frame
+      (add-hook 'after-make-frame-functions
+              (lambda (frame)
+                (with-selected-frame frame
+                  (dashboard-open))))
 
 
 #+end_src
@@ -1504,16 +1505,12 @@ PlantUML Mode, a major mode for editing PlantUML sources.
 
 #+begin_src emacs-lisp
 
-  (use-package pdf-tools-install
-    :ensure pdf-tools
-    :if (display-graphic-p)
+  (use-package pdf-tools
     :mode "\\.pdf\\'"
-    :commands (pdf-loader-install)
     :custom
-    (TeX-view-program-selection '((output-pdf "pdf-tools")))
-    (TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
+    (TeX-view-program-selection '(output-pdf "pdf-tools"))
     :config
-    (pdf-loader-install))
+    (pdf-tools-install))
 
 #+end_src
 

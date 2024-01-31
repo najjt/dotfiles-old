@@ -504,7 +504,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :diminish (dashboard-mode page-break-lines-mode)
   :custom
   (dashboard-items '((bookmarks . 7)
-                     (projects . 5)))
+                     (projects . 5)
+                     (recents . 4)))
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-center-content t)
@@ -933,16 +934,12 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
    mu4e-compose-format-flowed t ; re-flow mail so it's not hard wrapped
    ))
 
-(use-package pdf-tools-install
-  :ensure pdf-tools
-  :if (display-graphic-p)
+(use-package pdf-tools
   :mode "\\.pdf\\'"
-  :commands (pdf-loader-install)
   :custom
-  (TeX-view-program-selection '((output-pdf "pdf-tools")))
-  (TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
+  (TeX-view-program-selection '(output-pdf "pdf-tools"))
   :config
-  (pdf-loader-install))
+  (pdf-tools-install))
 
 ;; soft-wrap text
 (global-visual-line-mode t)
