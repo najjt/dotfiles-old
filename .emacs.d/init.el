@@ -484,8 +484,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
       "^\\*helpful.*\\*$" helpful-mode))
   (popper-mode +1)
   (popper-echo-mode +1)
-  (setq popper-mode-line " POP ")
-  )
+  (setq popper-mode-line " POP "))
 
 ;; turn on line numbers and highlight current line
 (dolist (hook '(prog-mode-hook text-mode-hook markdown-mode-hook org-mode-hook))
