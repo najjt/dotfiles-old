@@ -789,9 +789,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
            '((:name "Schedule"
                     :time-grid t)
              (:name "Studier"
-                    :and (:category "studier" :deadline nil))
+                    :and (:category "studier" :deadline today))
              (:name "Privat"
-                    :and (:category ("privat" "capture" "computer") :deadline nil))
+                    :and (:category ("privat" "capture" "computer") :deadline today))
              (:name "Upcoming Deadlines"
                     :deadline future)
              (:name "Vanor"
@@ -885,13 +885,31 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
         ("q" . "quote")))
 
 (use-package calfw
+  :bind ("C-c o" . my/custom-org-calendar)
   :config
   (use-package calfw-org) ; integrate calfw with org
 
-  (general-define-key
-   "C-c o" 'cfw:open-org-calendar))
+  (use-package calfw-blocks ; visual time blocks
+    :ensure nil
+    :load-path ("calfw-blocks")
+    :bind (:map cfw:calendar-mode-map
+                ("b" . calfw-blocks-change-view-block-week)
+                ("t" . calfw-blocks-change-view-transpose-two-weeks))
+    :config
+    (setq calfw-blocks-earliest-visible-time '(7 0))
+    (setq calfw-blocks-default-event-length 1)
+    (setq calfw-blocks-lines-per-hour 2))
 
-(load "sv-kalender")
+  ;; open calendar with two weeks view
+  (defun my/custom-org-calendar ()
+    (interactive)
+    (cfw:open-calendar-buffer
+     :contents-sources
+     (list
+      (cfw:org-create-source "medium purple"))
+     :view 'block-week))
+
+  (load "sv-kalender")) ; use swedish calendar
 
 (use-package plantuml-mode
   :defer t
