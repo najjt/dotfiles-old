@@ -760,10 +760,10 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   (setq org-agenda-scheduled-leaders '("" ""))
   (setq org-element-use-cache nil) ; org element cache often produced errors, so I disabled it
 
-  ;; date heading text settings
+  ;; date heading settings
   (custom-set-faces
-   '(org-agenda-date ((t (:height 1.0 :weight bold))))
-   '(org-agenda-date-today ((t (:height 1.0 :weight bold)))))
+   '(org-agenda-date ((t (:height 1.0 :weight bold :background nil))))
+   '(org-agenda-date-today ((t (:height 1.3 :weight bold :background nil)))))
 
   ;; add newline above date heading
   (setq org-agenda-format-date
