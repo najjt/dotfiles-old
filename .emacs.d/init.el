@@ -921,6 +921,10 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
    ;; Maildir setup
    mu4e-maildir "~/.mail"
    mu4e-attachment-dir "~/Downloads"
+   mu4e-maildir-shortcuts
+   '(("/INBOX" . ?i)
+     ("/Sent" . ?s)
+     ("/Archive" . ?a))
 
    ;; Fetch mail
    mu4e-get-mail-command "mbsync -a"
@@ -928,7 +932,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
    mu4e-update-interval 120              ; update every 2 minutes
 
    ;; Send mail
-   message-send-mail-function 'smtpmail-send-it
+   message-send-mail-function 'message-send-mail-with-sendmail
    smtpmail-auth-credentials "~/.authinfo"
    smtpmail-smtp-server "127.0.0.1"
    smtpmail-smtp-service 1025

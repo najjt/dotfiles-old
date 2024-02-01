@@ -1458,6 +1458,8 @@ PlantUML Mode, a major mode for editing PlantUML sources.
 
 ** Mail
 
+[[https://www.emacswiki.org/emacs/mu4e][mu4e]] is an email client for Emacs, based on the mu email indexer/searcher.
+
 #+begin_src emacs-lisp
 
   (use-package mu4e
@@ -1478,6 +1480,10 @@ PlantUML Mode, a major mode for editing PlantUML sources.
      ;; Maildir setup
      mu4e-maildir "~/.mail"
      mu4e-attachment-dir "~/Downloads"
+     mu4e-maildir-shortcuts
+     '(("/INBOX" . ?i)
+       ("/Sent" . ?s)
+       ("/Archive" . ?a))
 
      ;; Fetch mail
      mu4e-get-mail-command "mbsync -a"
@@ -1485,7 +1491,7 @@ PlantUML Mode, a major mode for editing PlantUML sources.
      mu4e-update-interval 120              ; update every 2 minutes
 
      ;; Send mail
-     message-send-mail-function 'smtpmail-send-it
+     message-send-mail-function 'message-send-mail-with-sendmail
      smtpmail-auth-credentials "~/.authinfo"
      smtpmail-smtp-server "127.0.0.1"
      smtpmail-smtp-service 1025
@@ -1500,6 +1506,8 @@ PlantUML Mode, a major mode for editing PlantUML sources.
 #+end_src
 
 ** PDF Tools
+
+[[https://github.com/vedang/pdf-tools][PDF Tools]] has better PDF support than DocView.
 
 #+begin_src emacs-lisp
 
