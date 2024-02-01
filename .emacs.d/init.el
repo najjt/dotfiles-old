@@ -113,36 +113,24 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   ;; which environment variables to import
   (dolist (var '("LANG" "LC_ALL"))
     (add-to-list 'exec-path-from-shell-variables var))
+  (exec-path-from-shell-initialize))
 
-  ;; activate exec-path-from-shell on macos and linux
-  (when (or *sys/linux* *sys/mac*)
-    (exec-path-from-shell-initialize))
+(use-package swiper :diminish)
 
-  ;; activate exec-path-from-shell when emacs is launched as daemon
-  (when (daemonp)
-    (exec-path-from-shell-initialize)))
-
-(use-package swiper
-  :diminish
-  :config
-  (define-key swiper-map (kbd "C-h") 'delete-backward-char))
-
-(use-package markdown-mode
-  :defer t)
+(use-package markdown-mode :defer t)
 
 (use-package flyspell
   :diminish flyspell-mode
   :hook
-  (((markdown-mode org-mode text-mode) . flyspell-mode)
-   (prog-mode . flyspell-prog-mode))
+  ((markdown-mode org-mode text-mode) . flyspell-mode)
+  (prog-mode . flyspell-prog-mode)
+  :bind
+  ("C-l" . flyspell-auto-correct-previous-word)
   :config
-  (general-define-key
-   "C-l" 'flyspell-auto-correct-previous-word)
-
   (with-eval-after-load "ispell"
     (setenv "LANG" "en_US.UTF-8")
-    (setq ispell-program-name "hunspell")
-    (setq ispell-dictionary "en_US,sv")
+    (setq ispell-program-name "hunspell"
+          ispell-dictionary "en_US,sv")
 
     ;; ispell-set-spellchecker-params has to be called before ispell-hunspell-add-multi-dic
     (ispell-set-spellchecker-params)
@@ -173,6 +161,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (use-package general
   :config
+  ;; leader key for hydras
   (general-create-definer my/leader-keys
     :keymaps '(normal visual emacs)
     :prefix ","
@@ -190,58 +179,56 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (use-package evil
   :diminish
   :demand t
-  :bind (
-     ("C-z" . evil-local-mode)
+  :bind
+  ("C-z" . evil-local-mode)
 
-     :map evil-normal-state-map
-     ("C-w h" . evil-window-left)
-     ("C-w j" . evil-window-down)
-     ("C-w k" . evil-window-up)
-     ("C-w l" . evil-window-right)
-
-     :map evil-insert-state-map
-     ("C-h" . evil-delete-backward-char-and-join))
+  (:map evil-normal-state-map
+        ("C-w h" . evil-window-left)
+        ("C-w j" . evil-window-down)
+        ("C-w k" . evil-window-up)
+        ("C-w l" . evil-window-right))
 
   :hook
   (evil-mode . my/evil-hook)
-  (doc-view-mode . turn-off-evil-mode)
 
   :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-i-jump nil)
-  (setq evil-search-module 'evil-search)
+  (setq evil-want-integration t
+        evil-want-keybinding nil
+        evil-want-C-u-scroll t
+        evil-want-C-i-jump nil
+        evil-search-module 'evil-search)
 
   :config
   (defun my/evil-hook () ; modes to disable evil in
     (dolist (mode '(custom-mode
-            eshell-mode
-            git-rebase-mode
-            erc-mode
-            term-mode
-            ansi-term-mode))
-  (add-to-list 'evil-emacs-state-modes mode)))
+                    eshell-mode
+                    git-rebase-mode
+                    erc-mode
+                    term-mode
+                    ansi-term-mode))
+      (add-to-list 'evil-emacs-state-modes mode)))
 
-  (evil-mode 1)
-  (evil-set-undo-system 'undo-redo)
-
-  ;; horizontal movement crosses lines
-  (setq-default evil-cross-lines t)
+  (evil-mode +1)
 
   ;; move on visual lines unless a count is involved
   (with-eval-after-load 'evil
     (evil-define-motion evil-next-line (count)
-  "Move the cursor COUNT screen lines down."
-  :type line
-  (let ((line-move-visual (unless count t)))
-    (evil-line-move (or count 1))))
+      "Move the cursor COUNT screen lines down."
+      :type line
+      (let ((line-move-visual (unless count t)))
+        (evil-line-move (or count 1))))
 
     (evil-define-motion evil-previous-line (count)
-  "Move the cursor COUNT lines up."
-  :type line
-  (let ((line-move-visual (unless count t)))
-    (evil-line-move (- (or count 1)))))))
+      "Move the cursor COUNT lines up."
+      :type line
+      (let ((line-move-visual (unless count t)))
+        (evil-line-move (- (or count 1))))))
+
+  :custom
+  (evil-set-undo-system 'undo-tree)
+
+  ;; horizontal movement crosses lines
+  (evil-cross-lines t))
 
 ;; more vim keybindings (in non-file buffers)
 (use-package evil-collection
@@ -253,7 +240,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; even even more vim keybindings (adds surround functionality)
 (use-package evil-surround
   :config
-  (global-evil-surround-mode 1))
+  (global-evil-surround-mode +1))
 
 (use-package hydra
   :config
@@ -346,9 +333,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :ensure nil
   :commands (dired dired-jump)
   :hook (dired-mode . (lambda () (dired-hide-details-mode)))
+  :custom
+  (dired-free-space nil)
   :config
-  (setq dired-free-space nil)
-
   (use-package dired-single) ; reuse buffer
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-single-up-directory
@@ -362,30 +349,27 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; helpful ui additions
 (use-package counsel
   :diminish
-  :bind (("M-x" . counsel-M-x)
-     ("C-M-j" . counsel-switch-buffer)
-     ("C-x C-f" . counsel-find-file))
+  :bind
+  ("M-x" . counsel-M-x)
+  ("C-M-j" . counsel-switch-buffer)
+  ("C-x C-f" . counsel-find-file)
 
   :config
-  (counsel-mode 1)
-  (define-key ivy-minibuffer-map (kbd "C-h") 'delete-backward-char))
+  (counsel-mode +1))
 
 (use-package ivy
   :diminish
-  :bind (("C-s" . swiper)
-     :map ivy-minibuffer-map
-     ("TAB" . ivy-alt-done)
-     ("C-l" . ivy-alt-done)
-     :map ivy-switch-buffer-map
-     ("C-l" . ivy-done)
-     ("C-d" . ivy-switch-buffer-kill)
-     :map ivy-reverse-i-search-map
-     ("C-d" . ivy-reverse-i-search-kill))
+  :bind
+  ("C-s" . swiper)
+  (:map ivy-switch-buffer-map
+        ("C-d" . ivy-switch-buffer-kill))
+  (:map ivy-reverse-i-search-map
+        ("C-d" . ivy-reverse-i-search-kill))
 
   :config
   (ivy-mode 1)
-  (setq ivy-initial-inputs-alist nil) ; hide "^" from ivy minibuffer
-  (define-key ivy-minibuffer-map (kbd "C-h") 'delete-backward-char))
+  ;; hide "^" from ivy minibuffer
+  (setq ivy-initial-inputs-alist nil))
 
 ;; helpful information for functions in minibuffers
 (use-package ivy-rich
@@ -417,33 +401,28 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :config
   (which-key-mode 1))
 
-(use-package discover-my-major
-  :bind ("C-h C-m" . discover-my-major))
-
 (use-package vterm
   :commands vterm
   :bind ("C-x t" . vterm)
-  :config
-  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
-  (setq vterm-shell "zsh")
-  (setq vterm-max-scrollback 10000))
+  :custom
+  (term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+  (vterm-shell "zsh")
+  (vterm-max-scrollback 10000))
 
-(setq scroll-step 1)
-(setq scroll-margin 1)
-(setq scroll-conservatively 101)
-(setq scroll-up-aggressively 0.01)
-(setq scroll-down-aggressively 0.01)
-(setq auto-window-vscroll nil)
-(setq fast-but-imprecise-scrolling nil)
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
-(setq mouse-wheel-progressive-speed nil)
-;; Horizontal Scroll
-(setq hscroll-step 1)
-(setq hscroll-margin 1)
+(setq scroll-step 1
+      scroll-margin 1
+      scroll-conservatively 101
+      scroll-up-aggressively 0.01
+      scroll-down-aggressively 0.01
+      auto-window-vscroll nil
+      fast-but-imprecise-scrolling nil
+      mouse-wheel-scroll-amount '(1 ((shift) . 1))
+      mouse-wheel-progressive-speed nil
+      hscroll-step 1
+      hscroll-margin 1)
 
 (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-17"))
 
-;; nerd icons
 (use-package nerd-icons)
 
 (use-package mood-line
@@ -463,9 +442,10 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
  '(mode-line-inactive ((t (:box nil)))))
 
 (use-package popper
-  :bind (("C-å"   . popper-toggle)
-     ("M-å"   . popper-cycle)
-     ("C-M-å" . popper-toggle-type))
+  :bind
+  ("C-å"   . popper-toggle)
+  ("M-å"   . popper-cycle)
+  ("C-M-å" . popper-toggle-type)
   :init
   (setq popper-reference-buffers
     '("\\*Messages\\*"
@@ -482,8 +462,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
       "^\\*vterm.*\\*$"  vterm-mode
       "^\\*ansi-term.*\\*$"  ansi-term-mode
       "^\\*helpful.*\\*$" helpful-mode))
-  (popper-mode +1)
-  (popper-echo-mode +1)
+  (popper-mode 1)
+  (popper-echo-mode 1)
   (setq popper-mode-line " POP "))
 
 ;; turn on line numbers and highlight current line
@@ -494,12 +474,13 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; relative line numbers
 (setq display-line-numbers-type 'relative)
 
-(setq frame-title-format '((:eval (if (buffer-file-name)
-                                      (abbreviate-file-name (buffer-file-name))
-                                    "%b"))))
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
 
 (use-package dashboard
-  :demand
+  :demand t
   :diminish (dashboard-mode page-break-lines-mode)
   :custom
   (dashboard-items '((bookmarks . 7)
@@ -507,12 +488,11 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
                      (recents . 4)))
   :config
   (dashboard-setup-startup-hook)
-  (setq dashboard-center-content t)
-  (setq dashboard-set-footer nil)
-  (setq dashboard-display-icons-p nil))
 
-;; set dashboard buffer as initial buffer choice
-(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+  (setq dashboard-center-content t
+        dashboard-set-footer nil
+        dashboard-display-icons-p t
+        dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name))
 
 ;; hook dashboard-open to creation of new frame
 (add-hook 'after-make-frame-functions
@@ -526,8 +506,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (use-package lsp-mode
   :commands lsp
-  :hook ((java-mode . lsp-deferred)
-         (tex-mode . lsp-deferred))
+  :hook
+  ((java-mode tex-mode) . lsp-deferred)
+
   :custom
   (lsp-keymap-prefix "C-c l")
   (lsp-auto-guess-root nil)
@@ -540,10 +521,12 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   (lsp-enable-which-key-integration t)
 
   ;; headerline breadcrumb
-  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file))
+  (lsp-headerline-breadcrumb-segments '(path-up-to-project file))
   (lsp-headerline-breadcrumb-mode)
 
-  :bind (:map lsp-mode-map ("C-c C-f" . lsp-format-buffer))
+  :bind
+  (:map lsp-mode-map ("C-c C-f" . lsp-format-buffer))
+
   :config
   (setq lsp-headerline-breadcrumb-icons-enable nil)
   (setq lsp-modeline-code-action-fallback-icon "[A]")
@@ -586,9 +569,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :config
   ;; use lsp-ui-doc-webkit only in GUI
   (when (display-graphic-p)
-    (setq lsp-ui-doc-use-webkit t))
-  ;; `C-g'to close doc
-  (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide))
+    (setq lsp-ui-doc-use-webkit t)))
 
 (use-package dap-mode
   :diminish
@@ -640,10 +621,11 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :diminish
   :after lsp-mode
   :hook (lsp-mode . company-mode)
-  :bind (:map company-active-map
-     ("<tab>" . company-complete-selection))
-    (:map lsp-mode-map
-     ("<tab>" . company-indent-or-complete-common))
+  :bind
+  (:map company-active-map
+        ("<tab>" . company-complete-selection))
+  (:map lsp-mode-map
+        ("<tab>" . company-indent-or-complete-common))
   :custom
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0))
@@ -659,20 +641,19 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :hook (prog-mode . (lambda () (rainbow-delimiters-mode))))
 
 (use-package projectile
-  :diminish projectile-mode
-  :config
-  (projectile-mode)
-  (setq projectile-ignored-projects '("~/.cfg" "~/.emacs.d" "~/Projects/pathfinder"))
-  :custom ((projectile-completion-system 'ivy))
+  :diminish
+  :custom (projectile-completion-system 'ivy)
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
-  (when (file-directory-p "~/Projects")
-    (setq projectile-project-search-path '("~/Projects")))
-  (setq projectile-switch-project-action #'projectile-dired))
+  (setq projectile-switch-project-action #'projectile-dired)
+  :config
+  (projectile-mode 1)
+  (setq projectile-ignored-projects '("~/.cfg" "~/.emacs.d" "~/Projects/pathfinder")
+        projectile-track-known-projects-automatically nil)
 
-(use-package counsel-projectile
-  :config (counsel-projectile-mode))
+  (use-package counsel-projectile
+    :config (counsel-projectile-mode 1)))
 
 (use-package magit
   :custom
@@ -724,20 +705,12 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
          ("C-c c" . org-capture)
          ("C-c l" . org-store-link))
   :config
-  (setq org-directory "~/Documents/notes/org")
-  (setq org-default-notes-file (concat org-directory "/capture.org"))
-  (setq org-todo-keywords '((sequence "TODO" "NEXT" "|" "DONE")))
-  (setq org-tags-column 0)
-  (setq org-startup-folded t)
-  (setq org-export-backends '(md org ascii html icalendar latex odt rss))
-
-  (defun my/org-insert-heading-at-point ()
-    "Insert a new heading at the current line in Org mode."
-    (interactive)
-    (org-insert-heading)
-    (org-metaright))
-
-  (define-key org-mode-map (kbd "M-RET") 'my/org-insert-heading-at-point)
+  (setq org-directory "~/Documents/notes/org"
+        org-default-notes-file (concat org-directory "/capture.org")
+        org-todo-keywords '((sequence "TODO" "NEXT" "|" "DONE"))
+        org-tags-column 0
+        org-startup-folded t
+        org-export-backends '(md org ascii html icalendar latex odt rss))
 
   ;; remap org indentation keys
   (with-eval-after-load 'org
@@ -751,38 +724,40 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :ensure nil
   :after org
   :config
-  (setq org-agenda-span 'day)
-  (setq org-agenda-tags-column 0)
-  (setq org-agenda-start-on-weekday nil)
-  (setq org-agenda-skip-scheduled-if-deadline-is-shown t)
-  (setq org-agenda-skip-deadline-if-done t)
-  (setq org-agenda-skip-scheduled-if-done t)
-  (setq org-agenda-todo-list-sublevels t)
-  (setq org-agenda-scheduled-leaders '("" ""))
-  (setq org-element-use-cache nil) ; org element cache often produced errors, so I disabled it
+  (setq org-agenda-span 'day
+        org-agenda-tags-column 0
+        org-agenda-start-on-weekday nil
+        org-agenda-skip-scheduled-if-deadline-is-shown t
+        org-agenda-skip-deadline-if-done t
+        org-agenda-skip-scheduled-if-done t
+        org-agenda-todo-list-sublevels t
+        org-agenda-scheduled-leaders '("" "")
+
+        ;; org element cache often produced errors, so I disabled it
+        org-element-use-cache nil
+
+        ;; add newline above date heading
+        org-agenda-format-date
+        (lambda (date)
+          (concat "\n" (org-agenda-format-date-aligned date)))
+
+        ;; time grid settings
+        org-agenda-time-grid
+        '((daily today require-timed remove-match)
+          (800 1000 1200 1400 1600 1800 2000)
+          "...." "------------")
+        org-agenda-current-time-string
+        "← now")
 
   ;; date heading settings
   (custom-set-faces
    '(org-agenda-date ((t (:height 1.0 :weight bold :background nil))))
-   '(org-agenda-date-today ((t (:height 1.3 :weight bold :background nil)))))
-
-  ;; add newline above date heading
-  (setq org-agenda-format-date
-        (lambda (date)
-          (concat "\n" (org-agenda-format-date-aligned date))))
-
-  ;; time grid settings
-  (setq org-agenda-time-grid
-    '((daily today require-timed remove-match)
-      (800 1000 1200 1400 1600 1800 2000)
-      "...." "------------")
-    org-agenda-current-time-string
-    "← now"))
+   '(org-agenda-date-today ((t (:height 1.3 :weight bold :background nil))))))
 
 (use-package org-super-agenda
   :after org-agenda
   :config
-  (org-super-agenda-mode)
+  (org-super-agenda-mode 1)
 
   ;; only apply super agenda groups on org-agenda-list
   (defun my-org-agenda-list (orig-fun &rest args)
@@ -811,12 +786,11 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :after org
   :config
   ;; don't save org capture bookmarks
-  (setq org-bookmark-names-plist nil)
-  (setq org-capture-bookmark nil)
+  (setq org-bookmark-names-plist nil
+        org-capture-bookmark nil)
   :custom
   (org-capture-templates
-   '(
-     ("t" "Task")
+   '(("t" "Task")
 
      ("tt" "Task" entry (file+headline "" "Tasks")
   "* TODO %?\n  %i\n")
@@ -891,36 +865,39 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (use-package calfw
   :config
-  ;; integrate calfw with org
-  (use-package calfw-org
-    :after calfw)
-
-  ;; visual time blocks
-  (use-package calfw-blocks
-    :ensure nil
-    :demand t
-    :after calfw
-    :load-path ("~/.emacs.d/elisp/calfw-blocks")
-    :bind ((:map cfw:calendar-mode-map
-                ("w" . calfw-blocks-change-view-block-week)
-                ("t" . calfw-blocks-change-view-transpose-two-weeks))
-           ("C-c o" . my/custom-open-calendar))
-    :config
-    (setq calfw-blocks-earliest-visible-time '(7 0))
-    (setq calfw-blocks-default-event-length 1)
-    (setq calfw-blocks-lines-per-hour 4))
-
   ;; use swedish calendar
-  (load "sv-kalender")
+  (load "sv-kalender"))
 
-  ;; open calendar with two weeks view
-  (defun my/custom-open-calendar ()
-    (interactive)
-    (cfw:open-calendar-buffer
-     :contents-sources
-     (list
-      (cfw:org-create-source "medium purple"))
-     :view 'transpose-two-weeks)))
+;; integrate calfw with org
+(use-package calfw-org
+  :after calfw)
+
+;; visual time blocks
+(use-package calfw-blocks
+  :ensure nil
+  :demand t
+  :after calfw
+  :load-path ("~/.emacs.d/elisp/calfw-blocks")
+  :bind
+  (:map cfw:calendar-mode-map
+        ("w" . calfw-blocks-change-view-block-week)
+        ("t" . calfw-blocks-change-view-transpose-two-weeks))
+  :config
+  (setq calfw-blocks-earliest-visible-time '(7 0)
+        calfw-blocks-default-event-length 1
+        calfw-blocks-lines-per-hour 4))
+
+;; open calendar with two weeks view
+(defun my/custom-open-calendar ()
+  (interactive)
+  (cfw:open-calendar-buffer
+   :contents-sources
+   (list
+    (cfw:org-create-source "medium purple"))
+   :view 'transpose-two-weeks))
+
+(general-define-key
+ "C-c o" 'my/custom-open-calendar)
 
 (use-package plantuml-mode
   :defer t
@@ -932,9 +909,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :defer 20 ; load 20 s after startup
   :commands (mu4e make-mu4e-context)
   :bind
-  (("C-x m" . mu4e)
-   (:map mu4e-view-mode-map
-     ("e" . mu4e-view-save-attachment)))
+  ("C-x m" . mu4e)
+  (:map mu4e-view-mode-map
+        ("e" . mu4e-view-save-attachment))
   :config
   (add-to-list 'gnutls-trustfiles (expand-file-name "~/.config/protonmail/bridge/cert.pem"))
   (setq
