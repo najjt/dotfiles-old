@@ -461,7 +461,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
       "^\\*term.*\\*$"   term-mode
       "^\\*vterm.*\\*$"  vterm-mode
       "^\\*ansi-term.*\\*$"  ansi-term-mode
-      "^\\*helpful.*\\*$" helpful-mode))
+      helpful-mode))
   (popper-mode 1)
   (popper-echo-mode 1)
   (setq popper-mode-line " POP "))
@@ -502,7 +502,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (use-package prog-mode
   :ensure nil
-  :mode "\\.edn\\'")
+  :mode ("\\.edn\\'" "\\.lua\\'"))
 
 (use-package lsp-mode
   :commands lsp
@@ -620,7 +620,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (use-package company
   :diminish
   :after lsp-mode
-  :hook (lsp-mode . company-mode)
+  :hook ((prog-mode LaTeX-mode latex-mode) . company-mode)
   :bind
   (:map company-active-map
         ("<tab>" . company-complete-selection))
@@ -678,25 +678,25 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   (python-shell-interpreter "python3"))
 
 (use-package tex
-:ensure auctex
-:defer t
-:custom
-(TeX-auto-save t)
-(TeX-parse-self t)
-(TeX-master nil)
-;; to use pdfview with auctex
-(TeX-view-program-selection '((output-pdf "pdf-tools"))
-                            TeX-source-correlate-start-server t)
-(TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
-(TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-:hook
-(LaTeX-mode . (lambda ()
-                (turn-on-reftex)
-                (setq reftex-plug-into-AUCTeX t)
-                (reftex-isearch-minor-mode)
-                (setq TeX-PDF-mode t)
-                (setq TeX-source-correlate-method 'synctex)
-                (setq TeX-source-correlate-start-server t))))
+  :ensure auctex
+  :defer t
+  :custom
+  (TeX-auto-save t)
+  (TeX-parse-self t)
+  (TeX-master nil)
+  ;; to use pdfview with auctex
+  ;(TeX-view-program-selection '((output-pdf "pdf-tools"))
+  ;                            TeX-source-correlate-start-server t)
+  ;(TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
+  (TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+  :hook
+  (LaTeX-mode . (lambda ()
+                  (turn-on-reftex)
+                  (reftex-isearch-minor-mode)
+                  (setq reftex-plug-into-AUCTeX t
+                        TeX-PDF-mode t
+                        TeX-source-correlate-method 'synctex
+                        TeX-source-correlate-start-server t))))
 
 (use-package org
   :pin nongnu
@@ -717,8 +717,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
     (general-define-key
      :keymaps 'org-mode-map
      "C-c i" 'org-metaright
-     "C-c u" 'org-metaleft
-     "M-RET" 'my/org-insert-heading-at-point)))
+     "C-c u" 'org-metaleft)))
 
 (use-package org-agenda
   :ensure nil
@@ -943,7 +942,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (use-package pdf-tools
   :mode "\\.pdf\\'"
   :custom
-  (TeX-view-program-selection '(output-pdf "pdf-tools"))
+  (TeX-view-program-selection '((output-pdf "pdf-tools")))
+  (TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
   :config
   (pdf-tools-install))
 

@@ -806,7 +806,7 @@ Popup buffers with [[https://github.com/karthink/popper][popper]].
         "^\\*term.*\\*$"   term-mode
         "^\\*vterm.*\\*$"  vterm-mode
         "^\\*ansi-term.*\\*$"  ansi-term-mode
-        "^\\*helpful.*\\*$" helpful-mode))
+        helpful-mode))
     (popper-mode 1)
     (popper-echo-mode 1)
     (setq popper-mode-line " POP "))
@@ -877,7 +877,7 @@ The [[https://github.com/emacs-dashboard/emacs-dashboard][Dashboard]] package di
 
   (use-package prog-mode
     :ensure nil
-    :mode "\\.edn\\'")
+    :mode ("\\.edn\\'" "\\.lua\\'"))
 
 #+end_src
 
@@ -1037,7 +1037,7 @@ Programming completions with [[https://github.com/company-mode/company-mode][com
   (use-package company
     :diminish
     :after lsp-mode
-    :hook (lsp-mode . company-mode)
+    :hook ((prog-mode LaTeX-mode latex-mode) . company-mode)
     :bind
     (:map company-active-map
           ("<tab>" . company-complete-selection))
@@ -1151,27 +1151,28 @@ Emacs Java IDE with [[https://github.com/emacs-lsp/lsp-java][lsp-java]].
 #+begin_src emacs-lisp
 
   (use-package tex
-  :ensure auctex
-  :defer t
-  :custom
-  (TeX-auto-save t)
-  (TeX-parse-self t)
-  (TeX-master nil)
-  ;; to use pdfview with auctex
-  (TeX-view-program-selection '((output-pdf "pdf-tools"))
-                              TeX-source-correlate-start-server t)
-  (TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
-  (TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-  :hook
-  (LaTeX-mode . (lambda ()
-                  (turn-on-reftex)
-                  (setq reftex-plug-into-AUCTeX t)
-                  (reftex-isearch-minor-mode)
-                  (setq TeX-PDF-mode t)
-                  (setq TeX-source-correlate-method 'synctex)
-                  (setq TeX-source-correlate-start-server t))))
+    :ensure auctex
+    :defer t
+    :custom
+    (TeX-auto-save t)
+    (TeX-parse-self t)
+    (TeX-master nil)
+    ;; to use pdfview with auctex
+    ;(TeX-view-program-selection '((output-pdf "pdf-tools"))
+    ;                            TeX-source-correlate-start-server t)
+    ;(TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
+    (TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+    :hook
+    (LaTeX-mode . (lambda ()
+                    (turn-on-reftex)
+                    (reftex-isearch-minor-mode)
+                    (setq reftex-plug-into-AUCTeX t
+                          TeX-PDF-mode t
+                          TeX-source-correlate-method 'synctex
+                          TeX-source-correlate-start-server t))))
 
 #+end_src
+
 * Office
 ** Org
 
@@ -1198,8 +1199,7 @@ I organize my life with [[https://orgmode.org/][Org Mode]]. The following header
       (general-define-key
        :keymaps 'org-mode-map
        "C-c i" 'org-metaright
-       "C-c u" 'org-metaleft
-       "M-RET" 'my/org-insert-heading-at-point)))
+       "C-c u" 'org-metaleft)))
 
 #+end_src
 
@@ -1506,7 +1506,8 @@ PlantUML Mode, a major mode for editing PlantUML sources.
   (use-package pdf-tools
     :mode "\\.pdf\\'"
     :custom
-    (TeX-view-program-selection '(output-pdf "pdf-tools"))
+    (TeX-view-program-selection '((output-pdf "pdf-tools")))
+    (TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
     :config
     (pdf-tools-install))
 
