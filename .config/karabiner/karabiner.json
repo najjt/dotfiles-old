@@ -116,7 +116,7 @@
             }
           },
           "to" : [ {
-            "shell_command" : "open /Applications/kitty.app"
+            "shell_command" : "open /Applications/WezTerm.app"
           } ],
           "type" : "basic"
         }, {

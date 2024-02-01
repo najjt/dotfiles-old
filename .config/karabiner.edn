@@ -67,7 +67,7 @@
                  ;; --- open applications ---
 
                  ;; open terminal
-                 [:!TOreturn_or_enter "open /Applications/kitty.app"]
+                 [:!TOreturn_or_enter "open /Applications/WezTerm.app"]
 
                  ;; open browser
                  [:!TSreturn_or_enter "open /Applications/qutebrowser.app"]
