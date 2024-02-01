@@ -902,7 +902,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
     :config
     (setq calfw-blocks-earliest-visible-time '(7 0))
     (setq calfw-blocks-default-event-length 1)
-    (setq calfw-blocks-lines-per-hour 2))
+    (setq calfw-blocks-lines-per-hour 4))
 
   ;; use swedish calendar
   (load "sv-kalender")
@@ -914,7 +914,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
      :contents-sources
      (list
       (cfw:org-create-source "medium purple"))
-     :view 'block-week)))
+     :view 'transpose-two-weeks)))
 
 (use-package plantuml-mode
   :defer t

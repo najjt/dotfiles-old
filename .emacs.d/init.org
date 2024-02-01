@@ -1441,7 +1441,7 @@ Calendar framework with [[https://github.com/kiwanami/emacs-calfw][calfw]]. [[ht
       :config
       (setq calfw-blocks-earliest-visible-time '(7 0))
       (setq calfw-blocks-default-event-length 1)
-      (setq calfw-blocks-lines-per-hour 2))
+      (setq calfw-blocks-lines-per-hour 4))
 
     ;; use swedish calendar
     (load "sv-kalender")
@@ -1453,7 +1453,7 @@ Calendar framework with [[https://github.com/kiwanami/emacs-calfw][calfw]]. [[ht
        :contents-sources
        (list
         (cfw:org-create-source "medium purple"))
-       :view 'block-week)))
+       :view 'transpose-two-weeks)))
 
 #+end_src
 
