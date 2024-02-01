@@ -660,7 +660,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (use-package projectile
   :diminish projectile-mode
-  :config (projectile-mode)
+  :config
+  (projectile-mode)
+  (setq projectile-ignored-projects '("~/.cfg" "~/.emacs.d" "~/Projects/pathfinder"))
   :custom ((projectile-completion-system 'ivy))
   :bind-keymap
   ("C-c p" . projectile-command-map)
@@ -787,14 +789,18 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
     (let ((org-super-agenda-groups
            '((:name "Schedule"
                     :time-grid t)
+             (:name "Vanor"
+                    :habit t)
+             (:name "Overdue"
+                    :deadline past
+                    :scheduled past)
              (:name "Studier"
                     :and (:category "studier" :deadline today))
              (:name "Privat"
-                    :and (:category ("privat" "capture" "computer") :deadline today))
+                    ;;:and (:category ("privat" "capture" "computer") :deadline today))
+                    :category ("privat" "capture" "computer"))
              (:name "Upcoming Deadlines"
                     :deadline future)
-             (:name "Vanor"
-                    :habit t)
              (:discard (:anything t)))))
       (apply orig-fun args)))
 
