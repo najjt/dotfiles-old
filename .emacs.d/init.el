@@ -43,7 +43,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (when *sys/mac*
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier 'none)
-  (setq dired-use-ls-dired nil))
+  (setq dired-use-ls-dired nil)
+  (setq frame-resize-pixelwise t))
 
 (defun update-to-load-path (folder)
   "Update FOLDER and its subdirectories to `load-path'."
@@ -558,7 +559,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
         ("M-r" . lsp-ui-peek-find-definitions)
         ("M-?" . lsp-ui-peek-find-references)
         ("C-c u" . lsp-ui-imenu)
-        ("M-i" . lsp-ui-doc-focus-frame))
+        ("M-i" . lsp-ui-doc-glance))
   :custom
   (lsp-ui-doc-header t)
   (lsp-ui-doc-include-signature t)
