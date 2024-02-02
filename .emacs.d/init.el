@@ -226,7 +226,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
         (evil-line-move (- (or count 1))))))
 
   :custom
-  (evil-set-undo-system 'undo-tree)
+  (evil-undo-system 'undo-tree)
 
   ;; horizontal movement crosses lines
   (evil-cross-lines t))
@@ -928,7 +928,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
    mu4e-attachment-dir "~/Downloads"
    mu4e-maildir-shortcuts
    '((:maildir "/Folders/viktigt" :key ?v)
-     (:maildir "/Folders/orders"  :key ?o))
+     (:maildir "/Folders/orders"  :key ?b))
 
    mu4e-contexts
    `(,(make-mu4e-context
