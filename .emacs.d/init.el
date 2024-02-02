@@ -467,7 +467,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   (setq popper-mode-line " POP "))
 
 ;; turn on line numbers and highlight current line
-(dolist (hook '(prog-mode-hook text-mode-hook markdown-mode-hook org-mode-hook))
+(dolist (hook '(conf-mode-hook prog-mode-hook text-mode-hook markdown-mode-hook org-mode-hook))
   (add-hook hook 'display-line-numbers-mode)
   (add-hook hook 'hl-line-mode))
 
@@ -910,7 +910,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :bind
   ("C-x m" . mu4e)
   (:map mu4e-view-mode-map
-        ("e" . mu4e-view-save-attachment))
+    ("e" . mu4e-view-save-attachment))
   :config
   (add-to-list 'gnutls-trustfiles (expand-file-name "~/.config/protonmail/bridge/cert.pem"))
   (setq
@@ -919,12 +919,90 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
    user-full-name  "Martin Lönn Andersson"
 
    ;; Maildir setup
-   mu4e-maildir "~/.mail"
+   mu4e-root-maildir "~/.mail"
    mu4e-attachment-dir "~/Downloads"
    mu4e-maildir-shortcuts
    '(("/INBOX" . ?i)
      ("/Sent" . ?s)
      ("/Archive" . ?a))
+
+   mu4e-contexts
+   `(,(make-mu4e-context
+   :name "prof"
+   :enter-func
+   (lambda () (mu4e-message "Enter mlonna@pm.me context"))
+   :leave-func
+   (lambda () (mu4e-message "Leave mlonna@pm.me context"))
+   :match-func
+   (lambda (msg)
+     (when msg
+       (mu4e-message-contact-field-matches msg
+                       :to "mlonna@pm.me")))
+   :vars '((user-mail-address . "mlonna@pm.me" )
+       (user-full-name . "Martin Lönn Andersson")
+       (mu4e-drafts-folder . "/mlonna/Drafts")
+       (mu4e-sent-folder . "/mlonna/Sent")
+       (mu4e-refile-folder . "/Archive")
+       (mu4e-trash-folder . "/Trash")))
+
+     ,(make-mu4e-context
+   :name "me"
+   :enter-func
+   (lambda () (mu4e-message "Enter nitramla@.me context"))
+   :leave-func
+   (lambda () (mu4e-message "Leave nitramla@.me context"))
+   :match-func
+   (lambda (msg)
+     (when msg
+       (mu4e-message-contact-field-matches msg
+                       :to "nitramla@pm.me")))
+   :vars '((user-mail-address . "nitramla@pm.me")
+       (user-full-name . "Martin")
+       (mu4e-drafts-folder . "/nitramla/Drafts")
+       (mu4e-sent-folder . "/nitramla/Sent")
+       (mu4e-refile-folder . "/Archive")
+       (mu4e-trash-folder . "/Trash")))
+
+     ,(make-mu4e-context
+   :name "safe"
+   :enter-func
+   (lambda () (mu4e-message "Enter hemlg@pm.me context"))
+   :leave-func
+   (lambda () (mu4e-message "Leave hemlg@pm.me context"))
+   :match-func
+   (lambda (msg)
+     (when msg
+       (mu4e-message-contact-field-matches msg
+                       :to "hemlg@pm.me")))
+   :vars '((user-mail-address . "hemlg@pm.me")
+       (user-full-name . "Martin")
+       (mu4e-drafts-folder . "/hemlg/Drafts")
+       (mu4e-sent-folder . "/hemlg/Sent")
+       (mu4e-refile-folder . "/Archive")
+       (mu4e-trash-folder . "/Trash")))
+
+     ,(make-mu4e-context
+   :name "trash"
+   :enter-func
+   (lambda () (mu4e-message "Enter trshcan@pm.me context"))
+   :leave-func
+   (lambda () (mu4e-message "Leave trshcan@pm.me context"))
+   :match-func
+   (lambda (msg)
+     (when msg
+       (mu4e-message-contact-field-matches msg
+                       :to "trshcan@pm.me")))
+   :vars '((user-mail-address . "trshcan@pm.me")
+       (user-full-name . "Martin")
+       (mu4e-drafts-folder . "/trshcan/Drafts")
+       (mu4e-sent-folder . "/trshcan/Sent")
+       (mu4e-refile-folder . "/Archive")
+       (mu4e-trash-folder . "/Trash"))))
+
+   ;; start with the first (default) context
+   mu4e-context-policy 'pick-first
+   ;; ask for context if no context matches;
+   mu4e-compose-context-policy 'ask
 
    ;; Fetch mail
    mu4e-get-mail-command "mbsync -a"
@@ -940,8 +1018,20 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
    ;; Other options
    mu4e-confirm-quit nil
-   mu4e-compose-format-flowed t ; re-flow mail so it's not hard wrapped
-   ))
+   ;; re-flow mail so it's not hard wrapped
+   mu4e-compose-format-flowed t
+   ;; hide annoying retrieving msg in mini buffer
+   mu4e-hide-index-messages t)
+
+  (add-to-list 'mu4e-bookmarks
+               '( :name "Inbox - mlonna"
+                  :query "maildir:/mlonna/INBOX"
+                  :key ?m))
+
+  (add-to-list 'mu4e-bookmarks
+               '( :name "Inbox - shopping"
+                  :query "maildir:/trshcan/INBOX"
+                  :key ?t)))
 
 (use-package pdf-tools
   :mode "\\.pdf\\'"
@@ -975,6 +1065,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 ;; automatically reload files when changed
 (global-auto-revert-mode t)
+
+;; suppress auto revert messages
+(setq auto-revert-verbose nil)
 
 ;; automatically kill all active processes when closing Emacs
 (setq confirm-kill-processes nil)
