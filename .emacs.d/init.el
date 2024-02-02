@@ -433,13 +433,13 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   (mood-line-mode 1)
   (column-number-mode t)) ; show column no. in modeline
 
+(use-package standard-themes)
+
 (use-package doom-themes)
 
 (use-package spaceway-theme
   :ensure nil
   :load-path "elisp/spaceway/")
-
-(use-package standard-themes)
 
 ;; disable border around modelines
 (custom-set-faces
