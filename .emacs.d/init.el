@@ -756,7 +756,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   ;; date heading settings
   (custom-set-faces
    '(org-agenda-date ((t (:height 1.0 :weight bold :background nil))))
-   '(org-agenda-date-today ((t (:height 1.3 :weight bold :background nil))))))
+   '(org-agenda-date-today ((t (:height 1.3 :weight bold :background nil :underline nil))))))
 
 (use-package org-super-agenda
   :after org-agenda
