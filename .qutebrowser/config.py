@@ -297,7 +297,7 @@ config.set('content.register_protocol_handler', True, 'https://mail.proton.me#ma
 # `{line0}`: Same as `{line}`, but starting from index 0. * `{column0}`:
 # Same as `{column}`, but starting from index 0.
 # Type: ShellCommand
-c.editor.command = ['kitty', '--single-instance', 'emacsclient', '{file}']
+#c.editor.command = ['kitty', '--single-instance', 'emacsclient', '{file}']
 
 # Scatter hint key chains (like Vimium) or not (like dwb). Ignored for
 # number hints.
