@@ -922,82 +922,65 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
    mu4e-root-maildir "~/.mail"
    mu4e-attachment-dir "~/Downloads"
    mu4e-maildir-shortcuts
-   '(("/INBOX" . ?i)
-     ("/Sent" . ?s)
-     ("/Archive" . ?a))
+   '((:maildir "/Folders/viktigt" :key ?v)
+     (:maildir "/Folders/orders"  :key ?o))
 
    mu4e-contexts
    `(,(make-mu4e-context
-   :name "prof"
-   :enter-func
-   (lambda () (mu4e-message "Enter mlonna@pm.me context"))
-   :leave-func
-   (lambda () (mu4e-message "Leave mlonna@pm.me context"))
-   :match-func
-   (lambda (msg)
-     (when msg
-       (mu4e-message-contact-field-matches msg
-                       :to "mlonna@pm.me")))
-   :vars '((user-mail-address . "mlonna@pm.me" )
-       (user-full-name . "Martin Lönn Andersson")
-       (mu4e-drafts-folder . "/mlonna/Drafts")
-       (mu4e-sent-folder . "/mlonna/Sent")
-       (mu4e-refile-folder . "/Archive")
-       (mu4e-trash-folder . "/Trash")))
+       :name "prof"
+       :match-func
+       (lambda (msg)
+         (when msg
+           (mu4e-message-contact-field-matches msg
+                                               :to "mlonna@pm.me")))
+       :vars '((user-mail-address . "mlonna@pm.me" )
+               (user-full-name . "Martin Lönn Andersson")
+               (mu4e-drafts-folder . "/mlonna/Drafts")
+               (mu4e-sent-folder . "/mlonna/Sent")
+               (mu4e-refile-folder . "/Archive")
+               (mu4e-trash-folder . "/Trash")))
 
      ,(make-mu4e-context
-   :name "me"
-   :enter-func
-   (lambda () (mu4e-message "Enter nitramla@.me context"))
-   :leave-func
-   (lambda () (mu4e-message "Leave nitramla@.me context"))
-   :match-func
-   (lambda (msg)
-     (when msg
-       (mu4e-message-contact-field-matches msg
-                       :to "nitramla@pm.me")))
-   :vars '((user-mail-address . "nitramla@pm.me")
-       (user-full-name . "Martin")
-       (mu4e-drafts-folder . "/nitramla/Drafts")
-       (mu4e-sent-folder . "/nitramla/Sent")
-       (mu4e-refile-folder . "/Archive")
-       (mu4e-trash-folder . "/Trash")))
+       :name "me"
+       :match-func
+       (lambda (msg)
+         (when msg
+           (mu4e-message-contact-field-matches msg
+                                               :to "nitramla@pm.me")))
+       :vars '((user-mail-address . "nitramla@pm.me")
+               (user-full-name . "Martin")
+               (mu4e-drafts-folder . "/nitramla/Drafts")
+               (mu4e-sent-folder . "/nitramla/Sent")
+               (mu4e-refile-folder . "/Archive")
+               (mu4e-trash-folder . "/Trash")))
 
      ,(make-mu4e-context
-   :name "safe"
-   :enter-func
-   (lambda () (mu4e-message "Enter hemlg@pm.me context"))
-   :leave-func
-   (lambda () (mu4e-message "Leave hemlg@pm.me context"))
-   :match-func
-   (lambda (msg)
-     (when msg
-       (mu4e-message-contact-field-matches msg
-                       :to "hemlg@pm.me")))
-   :vars '((user-mail-address . "hemlg@pm.me")
-       (user-full-name . "Martin")
-       (mu4e-drafts-folder . "/hemlg/Drafts")
-       (mu4e-sent-folder . "/hemlg/Sent")
-       (mu4e-refile-folder . "/Archive")
-       (mu4e-trash-folder . "/Trash")))
+       :name "safe"
+       :match-func
+       (lambda (msg)
+         (when msg
+           (mu4e-message-contact-field-matches msg
+                                               :to "hemlg@pm.me")))
+       :vars '((user-mail-address . "hemlg@pm.me")
+               (user-full-name . "Martin")
+               (mu4e-drafts-folder . "/hemlg/Drafts")
+               (mu4e-sent-folder . "/hemlg/Sent")
+               (mu4e-refile-folder . "/Archive")
+               (mu4e-trash-folder . "/Trash")))
 
      ,(make-mu4e-context
-   :name "trash"
-   :enter-func
-   (lambda () (mu4e-message "Enter trshcan@pm.me context"))
-   :leave-func
-   (lambda () (mu4e-message "Leave trshcan@pm.me context"))
-   :match-func
-   (lambda (msg)
-     (when msg
-       (mu4e-message-contact-field-matches msg
-                       :to "trshcan@pm.me")))
-   :vars '((user-mail-address . "trshcan@pm.me")
-       (user-full-name . "Martin")
-       (mu4e-drafts-folder . "/trshcan/Drafts")
-       (mu4e-sent-folder . "/trshcan/Sent")
-       (mu4e-refile-folder . "/Archive")
-       (mu4e-trash-folder . "/Trash"))))
+       :name "trash"
+       :match-func
+       (lambda (msg)
+         (when msg
+           (mu4e-message-contact-field-matches msg
+                                               :to "trshcan@pm.me")))
+       :vars '((user-mail-address . "trshcan@pm.me")
+               (user-full-name . "Martin")
+               (mu4e-drafts-folder . "/trshcan/Drafts")
+               (mu4e-sent-folder . "/trshcan/Sent")
+               (mu4e-refile-folder . "/Archive")
+               (mu4e-trash-folder . "/Trash"))))
 
    ;; start with the first (default) context
    mu4e-context-policy 'pick-first
@@ -1031,7 +1014,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   (add-to-list 'mu4e-bookmarks
                '( :name "Inbox - shopping"
                   :query "maildir:/trshcan/INBOX"
-                  :key ?t)))
+                  :key ?s)))
 
 (use-package pdf-tools
   :mode "\\.pdf\\'"
