@@ -37,7 +37,7 @@ yabai -m config                                          \
                                                          \
                 window_opacity              on           \
                 active_window_opacity       0.925        \
-                normal_window_opacity       0.80
+                normal_window_opacity       0.87
 
 # rules
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
