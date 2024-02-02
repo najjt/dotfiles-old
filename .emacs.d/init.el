@@ -252,10 +252,12 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (defhydra hydra-theme (:timeout 4)
   "choose theme"
-  ("d" (my/enable-theme 'doom-one) "doom one")
-  ("s" (my/enable-theme 'spaceway) "spaceway")
+  ("l" (my/enable-theme 'standard-light) "standard-light")
+  ("d" (my/enable-theme 'standard-dark) "standard-dark")
   ("o" (my/enable-theme 'modus-operandi) "modus-operandi")
   ("v" (my/enable-theme 'modus-vivendi) "modus-vivendi")
+  ("n" (my/enable-theme 'doom-one) "doom one")
+  ("s" (my/enable-theme 'spaceway) "spaceway")
   ("f" nil "finished" :exit t))
 
 (defun my/disable-all-themes ()
@@ -436,6 +438,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (use-package spaceway-theme
   :ensure nil
   :load-path "elisp/spaceway/")
+
+(use-package standard-themes)
 
 ;; disable border around modelines
 (custom-set-faces
