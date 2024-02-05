@@ -53,7 +53,7 @@ Disabling them here before they've been initialized.
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
   (blink-cursor-mode -1)
-  (set-fringe-mode 0)
+  (fringe-mode '(8 . 0))
 
 #+end_src
 
@@ -320,7 +320,6 @@ To spell check files, I use =flyspell= and =hunspell= in order to spell check in
 1. Install [[https://github.com/hunspell/hunspell][hunspell]].
 2. Install dictionary files.
 2. Create a personal dictionary file =~/.hunspell_personal=.
-
 
 #+begin_src emacs-lisp
 
@@ -801,17 +800,18 @@ Popup buffers with [[https://github.com/karthink/popper][popper]].
       '("\\*Messages\\*"
         "\\*Warnings\\*"
         "\\*Compile-Log\\*"
-        "Output\\*$"
-        "\\*Async Shell Command\\*"
-        help-mode
-        compilation-mode
         "^\\*compilation.*\\*$" comint-mode
+        "Output\\*$"
+        help-mode
+        helpful-mode
+        compilation-mode
+        "\\*Async Shell Command\\*"
         "^\\*eshell.*\\*$" eshell-mode
         "^\\*shell.*\\*$"  shell-mode
         "^\\*term.*\\*$"   term-mode
         "^\\*vterm.*\\*$"  vterm-mode
         "^\\*ansi-term.*\\*$"  ansi-term-mode
-        helpful-mode))
+        "^\\*Flycheck.*\\*$"))
     (popper-mode 1)
     (popper-echo-mode 1)
     (setq popper-mode-line " POP "))
@@ -872,6 +872,19 @@ The [[https://github.com/emacs-dashboard/emacs-dashboard][Dashboard]] package di
             (with-selected-frame frame
               (dashboard-open))))
 
+
+#+end_src
+
+** Focused editing
+
+A simple distraction-free editing experience: [[https://github.com/joaotavora/darkroom][Darkroom]].
+
+#+begin_src emacs-lisp
+
+  (use-package darkroom
+    :bind ("C-x f" . darkroom-tentative-mode)
+    :custom
+    (darkroom-text-scale-increase 0.2))
 
 #+end_src
 
@@ -999,14 +1012,12 @@ A syntax checking extension.
   (use-package flycheck
     :defer t
     :diminish
-    :hook (after-init . global-flycheck-mode)
+    :hook (lsp-mode . flycheck-mode)
     :commands (flycheck-add-mode)
     :bind ("C-c f e" . flycheck-list-errors)
     :custom
-    (flycheck-global-modes
-     '(not outline-mode diff-mode shell-mode eshell-mode term-mode))
     (flycheck-emacs-lisp-load-path 'inherit)
-    (flycheck-indication-mode (if (display-graphic-p) 'right-fringe 'right-margin))
+    (flycheck-indication-mode (if (display-graphic-p) 'left-fringe))
     :init
     (if (display-graphic-p)
         (use-package flycheck-posframe
@@ -1082,6 +1093,8 @@ Match delimiters with [[https://github.com/Fanael/rainbow-delimiters][rainbow-de
 
 ** Projectile
 
+Keep track of projects with [[https://github.com/bbatsov/projectile][Projectile]].
+
 #+begin_src emacs-lisp
 
   (use-package projectile
@@ -1090,7 +1103,7 @@ Match delimiters with [[https://github.com/Fanael/rainbow-delimiters][rainbow-de
     :bind-keymap
     ("C-c p" . projectile-command-map)
     :init
-    (setq projectile-switch-project-action #'projectile-dired)
+    (setq projectile-switch-project-action #'projectile-find-file)
     :config
     (projectile-mode 1)
     (setq projectile-ignored-projects '("~/.cfg" "~/.emacs.d" "~/Projects/pathfinder")
@@ -1102,6 +1115,8 @@ Match delimiters with [[https://github.com/Fanael/rainbow-delimiters][rainbow-de
 #+end_src
 
 ** Magit
+
+[[https://magit.vc/][Magit]]: a complete text-based user interface to Git
 
 #+begin_src emacs-lisp
 
@@ -1256,32 +1271,33 @@ I organize my life with [[https://orgmode.org/][Org Mode]]. The following header
 
 #+begin_src emacs-lisp
 
-  (use-package org-super-agenda
-    :after org-agenda
-    :config
-    (org-super-agenda-mode 1)
+    (use-package org-super-agenda
+      :after org-agenda
+      :config
+      (org-super-agenda-mode 1)
 
-    ;; only apply super agenda groups on org-agenda-list
-    (defun my-org-agenda-list (orig-fun &rest args)
-      (let ((org-super-agenda-groups
-             '((:name "Schedule"
-                      :time-grid t)
-               (:name "Vanor"
-                      :habit t)
-               (:name "Overdue"
-                      :deadline past
-                      :scheduled past)
-               (:name "Studier"
-                      :and (:category "studier" :deadline today))
-               (:name "Privat"
-                      ;;:and (:category ("privat" "capture" "computer") :deadline today))
-                      :category ("privat" "capture" "computer"))
-               (:name "Upcoming Deadlines"
-                      :deadline future)
-               (:discard (:anything t)))))
-        (apply orig-fun args)))
+      ;; only apply super agenda groups on org-agenda-list
+      (defun my-org-agenda-list (orig-fun &rest args)
+        (let ((org-super-agenda-groups
+               '((:name "Schedule"
+                        :time-grid t)
+                 (:name "Vanor"
+                        :habit t)
+                 (:name "Overdue"
+                        :deadline past
+                        :scheduled past)
+                 (:name "Studier"
+                        :and (:category "studier" :scheduled today)
+                        :and (:category "studier" :deadline today))
+                 (:name "Privat"
+                        :and (:category ("privat" "capture" "computer") :scheduled today)
+                        :and (:category ("privat" "capture" "computer") :deadline today))
+                 (:name "Upcoming Deadlines"
+                        :deadline future)
+                 (:discard (:anything t)))))
+          (apply orig-fun args)))
 
-    (advice-add 'org-agenda-list :around #'my-org-agenda-list))
+      (advice-add 'org-agenda-list :around #'my-org-agenda-list))
 
 #+end_src
 
@@ -1550,7 +1566,7 @@ PlantUML Mode, a major mode for editing PlantUML sources.
 
      ;; start with the first (default) context
      mu4e-context-policy 'pick-first
-     ;; ask for context if no context matches;
+     ;; ask for context if no context matches
      mu4e-compose-context-policy 'ask
 
      ;; Fetch mail

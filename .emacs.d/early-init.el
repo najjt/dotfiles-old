@@ -6,7 +6,7 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (blink-cursor-mode -1)
-(set-fringe-mode 0)
+(fringe-mode '(8 . 0))
 
 (require 'server)
 (if (not (server-running-p)) (server-start))

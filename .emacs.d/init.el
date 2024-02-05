@@ -456,17 +456,18 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
     '("\\*Messages\\*"
       "\\*Warnings\\*"
       "\\*Compile-Log\\*"
-      "Output\\*$"
-      "\\*Async Shell Command\\*"
-      help-mode
-      compilation-mode
       "^\\*compilation.*\\*$" comint-mode
+      "Output\\*$"
+      help-mode
+      helpful-mode
+      compilation-mode
+      "\\*Async Shell Command\\*"
       "^\\*eshell.*\\*$" eshell-mode
       "^\\*shell.*\\*$"  shell-mode
       "^\\*term.*\\*$"   term-mode
       "^\\*vterm.*\\*$"  vterm-mode
       "^\\*ansi-term.*\\*$"  ansi-term-mode
-      helpful-mode))
+      "^\\*Flycheck.*\\*$"))
   (popper-mode 1)
   (popper-echo-mode 1)
   (setq popper-mode-line " POP "))
@@ -504,6 +505,11 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
         (lambda (frame)
           (with-selected-frame frame
             (dashboard-open))))
+
+(use-package darkroom
+  :bind ("C-x f" . darkroom-tentative-mode)
+  :custom
+  (darkroom-text-scale-increase 0.2))
 
 (use-package prog-mode
   :ensure nil
@@ -590,14 +596,12 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (use-package flycheck
   :defer t
   :diminish
-  :hook (after-init . global-flycheck-mode)
+  :hook (lsp-mode . flycheck-mode)
   :commands (flycheck-add-mode)
   :bind ("C-c f e" . flycheck-list-errors)
   :custom
-  (flycheck-global-modes
-   '(not outline-mode diff-mode shell-mode eshell-mode term-mode))
   (flycheck-emacs-lisp-load-path 'inherit)
-  (flycheck-indication-mode (if (display-graphic-p) 'right-fringe 'right-margin))
+  (flycheck-indication-mode (if (display-graphic-p) 'left-fringe))
   :init
   (if (display-graphic-p)
       (use-package flycheck-posframe
@@ -651,7 +655,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
-  (setq projectile-switch-project-action #'projectile-dired)
+  (setq projectile-switch-project-action #'projectile-find-file)
   :config
   (projectile-mode 1)
   (setq projectile-ignored-projects '("~/.cfg" "~/.emacs.d" "~/Projects/pathfinder")
@@ -774,10 +778,11 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
                     :deadline past
                     :scheduled past)
              (:name "Studier"
+                    :and (:category "studier" :scheduled today)
                     :and (:category "studier" :deadline today))
              (:name "Privat"
-                    ;;:and (:category ("privat" "capture" "computer") :deadline today))
-                    :category ("privat" "capture" "computer"))
+                    :and (:category ("privat" "capture" "computer") :scheduled today)
+                    :and (:category ("privat" "capture" "computer") :deadline today))
              (:name "Upcoming Deadlines"
                     :deadline future)
              (:discard (:anything t)))))
@@ -989,7 +994,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
    ;; start with the first (default) context
    mu4e-context-policy 'pick-first
-   ;; ask for context if no context matches;
+   ;; ask for context if no context matches
    mu4e-compose-context-policy 'ask
 
    ;; Fetch mail
