@@ -424,6 +424,14 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
       hscroll-step 1
       hscroll-margin 1)
 
+(use-package perspective
+  :bind
+  ("C-x C-b" . persp-list-buffers)
+  :custom
+  (persp-mode-prefix-key (kbd "C-c M-p"))
+  :init
+  (persp-mode))
+
 (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-17"))
 
 (use-package nerd-icons)
@@ -467,6 +475,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
       "^\\*term.*\\*$"   term-mode
       "^\\*vterm.*\\*$"  vterm-mode
       "^\\*ansi-term.*\\*$"  ansi-term-mode
+      "^\\*tex-shell.*\\*$"
       "^\\*Flycheck.*\\*$"))
   (popper-mode 1)
   (popper-echo-mode 1)
@@ -739,10 +748,10 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
         org-agenda-skip-deadline-if-done t
         org-agenda-skip-scheduled-if-done t
         org-agenda-todo-list-sublevels t
-        org-agenda-scheduled-leaders '("" "")
-
         ;; org element cache often produced errors, so I disabled it
         org-element-use-cache nil
+        org-agenda-scheduled-leaders '("" "")  ; hide "Scheduled" text
+        org-agenda-prefix-format "  %?-12t% s" ; hide category for agenda items
 
         ;; add newline above date heading
         org-agenda-format-date
@@ -787,6 +796,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
                     :deadline future)
              (:discard (:anything t)))))
       (apply orig-fun args)))
+
 
   (advice-add 'org-agenda-list :around #'my-org-agenda-list))
 
@@ -889,7 +899,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :load-path ("~/.emacs.d/elisp/calfw-blocks")
   :bind
   (:map cfw:calendar-mode-map
-        ("w" . calfw-blocks-change-view-block-week)
         ("t" . calfw-blocks-change-view-transpose-two-weeks))
   :config
   (setq calfw-blocks-earliest-visible-time '(7 0)
@@ -905,8 +914,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
     (cfw:org-create-source "medium purple"))
    :view 'transpose-two-weeks))
 
-(general-define-key
- "C-c o" 'my/custom-open-calendar)
+(my/leader-keys
+  "o" '(my/custom-open-calendar :which-key "open calendar"))
 
 (use-package plantuml-mode
   :defer t
@@ -918,7 +927,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :defer 20 ; load 20 s after startup
   :commands (mu4e make-mu4e-context)
   :bind
-  ("C-x m" . mu4e)
   (:map mu4e-view-mode-map
     ("e" . mu4e-view-save-attachment))
   :config
@@ -1025,6 +1033,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
                '( :name "Inbox - shopping"
                   :query "maildir:/trshcan/INBOX"
                   :key ?s)))
+
+(my/leader-keys
+  "m" '(mu4e :which-key "open mail"))
 
 (use-package pdf-tools
   :mode "\\.pdf\\'"

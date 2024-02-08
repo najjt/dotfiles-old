@@ -1,4 +1,4 @@
-PS1=" [%F{green}%n@%m %F{white}%1~ %#] $ "
+PS1=" [%F{green}%n@%m%f %1~ %#] $ "
 
 # history time stamp format
 HIST_STAMPS="mm/dd/yyyy"

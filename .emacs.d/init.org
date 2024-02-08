@@ -733,6 +733,20 @@ A better terminal emulation with [[https://github.com/akermu/emacs-libvterm][vte
 
 #+end_src
 
+** Tabs
+
+#+begin_src emacs-lisp
+
+  (use-package perspective
+    :bind
+    ("C-x C-b" . persp-list-buffers)
+    :custom
+    (persp-mode-prefix-key (kbd "C-c M-p"))
+    :init
+    (persp-mode))
+
+#+end_src
+
 * UI Enhancements
 ** Font & Icons
 
@@ -811,6 +825,7 @@ Popup buffers with [[https://github.com/karthink/popper][popper]].
         "^\\*term.*\\*$"   term-mode
         "^\\*vterm.*\\*$"  vterm-mode
         "^\\*ansi-term.*\\*$"  ansi-term-mode
+        "^\\*tex-shell.*\\*$"
         "^\\*Flycheck.*\\*$"))
     (popper-mode 1)
     (popper-echo-mode 1)
@@ -1240,10 +1255,10 @@ I organize my life with [[https://orgmode.org/][Org Mode]]. The following header
           org-agenda-skip-deadline-if-done t
           org-agenda-skip-scheduled-if-done t
           org-agenda-todo-list-sublevels t
-          org-agenda-scheduled-leaders '("" "")
-
           ;; org element cache often produced errors, so I disabled it
           org-element-use-cache nil
+          org-agenda-scheduled-leaders '("" "")  ; hide "Scheduled" text
+          org-agenda-prefix-format "  %?-12t% s" ; hide category for agenda items
 
           ;; add newline above date heading
           org-agenda-format-date
@@ -1271,33 +1286,34 @@ I organize my life with [[https://orgmode.org/][Org Mode]]. The following header
 
 #+begin_src emacs-lisp
 
-    (use-package org-super-agenda
-      :after org-agenda
-      :config
-      (org-super-agenda-mode 1)
+  (use-package org-super-agenda
+    :after org-agenda
+    :config
+    (org-super-agenda-mode 1)
 
-      ;; only apply super agenda groups on org-agenda-list
-      (defun my-org-agenda-list (orig-fun &rest args)
-        (let ((org-super-agenda-groups
-               '((:name "Schedule"
-                        :time-grid t)
-                 (:name "Vanor"
-                        :habit t)
-                 (:name "Overdue"
-                        :deadline past
-                        :scheduled past)
-                 (:name "Studier"
-                        :and (:category "studier" :scheduled today)
-                        :and (:category "studier" :deadline today))
-                 (:name "Privat"
-                        :and (:category ("privat" "capture" "computer") :scheduled today)
-                        :and (:category ("privat" "capture" "computer") :deadline today))
-                 (:name "Upcoming Deadlines"
-                        :deadline future)
-                 (:discard (:anything t)))))
-          (apply orig-fun args)))
+    ;; only apply super agenda groups on org-agenda-list
+    (defun my-org-agenda-list (orig-fun &rest args)
+      (let ((org-super-agenda-groups
+             '((:name "Schedule"
+                      :time-grid t)
+               (:name "Vanor"
+                      :habit t)
+               (:name "Overdue"
+                      :deadline past
+                      :scheduled past)
+               (:name "Studier"
+                      :and (:category "studier" :scheduled today)
+                      :and (:category "studier" :deadline today))
+               (:name "Privat"
+                      :and (:category ("privat" "capture" "computer") :scheduled today)
+                      :and (:category ("privat" "capture" "computer") :deadline today))
+               (:name "Upcoming Deadlines"
+                      :deadline future)
+               (:discard (:anything t)))))
+        (apply orig-fun args)))
 
-      (advice-add 'org-agenda-list :around #'my-org-agenda-list))
+
+    (advice-add 'org-agenda-list :around #'my-org-agenda-list))
 
 #+end_src
 
@@ -1438,7 +1454,6 @@ Calendar framework with [[https://github.com/kiwanami/emacs-calfw][calfw]]. [[ht
     :load-path ("~/.emacs.d/elisp/calfw-blocks")
     :bind
     (:map cfw:calendar-mode-map
-          ("w" . calfw-blocks-change-view-block-week)
           ("t" . calfw-blocks-change-view-transpose-two-weeks))
     :config
     (setq calfw-blocks-earliest-visible-time '(7 0)
@@ -1454,8 +1469,8 @@ Calendar framework with [[https://github.com/kiwanami/emacs-calfw][calfw]]. [[ht
       (cfw:org-create-source "medium purple"))
      :view 'transpose-two-weeks))
 
-  (general-define-key
-   "C-c o" 'my/custom-open-calendar)
+  (my/leader-keys
+    "o" '(my/custom-open-calendar :which-key "open calendar"))
 
 #+end_src
 
@@ -1490,7 +1505,6 @@ PlantUML Mode, a major mode for editing PlantUML sources.
     :defer 20 ; load 20 s after startup
     :commands (mu4e make-mu4e-context)
     :bind
-    ("C-x m" . mu4e)
     (:map mu4e-view-mode-map
       ("e" . mu4e-view-save-attachment))
     :config
@@ -1598,6 +1612,8 @@ PlantUML Mode, a major mode for editing PlantUML sources.
                     :query "maildir:/trshcan/INBOX"
                     :key ?s)))
 
+  (my/leader-keys
+    "m" '(mu4e :which-key "open mail"))
 #+end_src
 
 ** PDF Tools
