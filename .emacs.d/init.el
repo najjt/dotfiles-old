@@ -257,6 +257,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   ("o" (my/enable-theme 'modus-operandi) "modus-operandi")
   ("v" (my/enable-theme 'modus-vivendi) "modus-vivendi")
   ("n" (my/enable-theme 'doom-one) "doom one")
+  ("t" (my/enable-theme 'doom-tokyo-night) "tokyo night")
   ("s" (my/enable-theme 'spaceway) "spaceway")
   ("f" nil "finished" :exit t))
 

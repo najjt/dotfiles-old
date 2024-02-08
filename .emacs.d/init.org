@@ -504,6 +504,7 @@ An easier way to set keybindings is with [[https://github.com/noctuid/general.el
     ("o" (my/enable-theme 'modus-operandi) "modus-operandi")
     ("v" (my/enable-theme 'modus-vivendi) "modus-vivendi")
     ("n" (my/enable-theme 'doom-one) "doom one")
+    ("t" (my/enable-theme 'doom-tokyo-night) "tokyo night")
     ("s" (my/enable-theme 'spaceway) "spaceway")
     ("f" nil "finished" :exit t))
 
@@ -779,7 +780,7 @@ Better modeline with [[https://github.com/jessiehildebrandt/mood-line][mood-line
 
 ** Themes
 
-I like the [[https://protesilaos.com/codelog/2022-11-30-standard-themes-emacs/][standard themes]], [[https://protesilaos.com/emacs/modus-themes][Modus themes]], [[https://github.com/doomemacs/themes?tab=readme-ov-file][Doom One]] and [[https://github.com/Gavinok/emacs.d/tree/1650fda3bda259579563adf6b7252b45bb605d82/lisp/spaceway][Spaceway]].
+I like the [[https://protesilaos.com/codelog/2022-11-30-standard-themes-emacs/][standard themes]], [[https://protesilaos.com/emacs/modus-themes][Modus themes]], [[https://github.com/doomemacs/themes?tab=readme-ov-file][Doom One]], [[https://github.com/doomemacs/themes][Doom Tokyo Night]] and [[https://github.com/Gavinok/emacs.d/tree/1650fda3bda259579563adf6b7252b45bb605d82/lisp/spaceway][Spaceway]].
 
 #+begin_src emacs-lisp
 
