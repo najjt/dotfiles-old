@@ -44,7 +44,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier 'none)
   (setq dired-use-ls-dired nil)
-  (setq frame-resize-pixelwise t))
+  (setq frame-resize-pixelwise t)
+  (add-to-list 'default-frame-alist '(undecorated . t)))
 
 (defun update-to-load-path (folder)
   "Update FOLDER and its subdirectories to `load-path'."
@@ -104,7 +105,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :diminish eldoc-mode
   :diminish evil-collection-unimpaired-mode
   :diminish abbrev-mode
-  :diminish lsp-lens-mode)
+  :diminish lsp-lens-mode
+  :diminish lsp-modeline-workspace-status-mode)
 
 (setq user-full-name "Martin Lönn Andersson")
 (setq user-mail-address "mlonna@pm.me")
@@ -234,7 +236,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; more vim keybindings (in non-file buffers)
 (use-package evil-collection
   :after evil
-  :diminish
+  :diminish evil-collection-unimpaired-mode
   :config
   (evil-collection-init))
 
@@ -439,7 +441,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (use-package mood-line
   :config
-  (mood-line-mode 1)
+  ;(mood-line-mode 1)
   (column-number-mode t)) ; show column no. in modeline
 
 (use-package standard-themes)
@@ -500,8 +502,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :diminish (dashboard-mode page-break-lines-mode)
   :custom
   (dashboard-items '((bookmarks . 7)
-                     (projects . 5)
-                     (recents . 4)))
+                     (projects . 5)))
   :config
   (dashboard-setup-startup-hook)
 
@@ -527,6 +528,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (use-package lsp-mode
   :commands lsp
+  :diminish lsp-lens-mode
   :hook
   ((java-mode tex-mode) . lsp-deferred)
 
@@ -538,7 +540,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   (lsp-enable-folding nil)
   (read-process-output-max (* 1024 1024))
   (lsp-keep-workspace-alive nil)
-  (lsp-eldoc-hook nil)
   (lsp-enable-which-key-integration t)
 
   ;; headerline breadcrumb
@@ -549,8 +550,12 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   (:map lsp-mode-map ("C-c C-f" . lsp-format-buffer))
 
   :config
-  (setq lsp-headerline-breadcrumb-icons-enable nil)
-  (setq lsp-modeline-code-action-fallback-icon "[A]")
+  (setq lsp-headerline-breadcrumb-icons-enable nil
+        lsp-modeline-code-actions-enable nil
+        lsp-signature-auto-activate t
+        lsp-signature-render-documentation t
+        lsp-modeline-diagnostics-enable nil
+        lsp-eldoc-enable-hover t)
 
   (defun lsp-update-server ()
     "Update LSP server."
@@ -704,9 +709,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   (TeX-parse-self t)
   (TeX-master nil)
   ;; to use pdfview with auctex
-  ;(TeX-view-program-selection '((output-pdf "pdf-tools"))
-  ;                            TeX-source-correlate-start-server t)
-  ;(TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
+  (TeX-view-program-selection '((output-pdf "pdf-tools"))
+                             TeX-source-correlate-start-server t)
+  (TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
   (TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
   :hook
   (LaTeX-mode . (lambda ()
@@ -810,40 +815,37 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
         org-capture-bookmark nil)
   :custom
   (org-capture-templates
-   '(("t" "Task")
+   '(
+     ("t" "Task" entry (file "")
+      "* TODO %?\n  %i\n")
 
-     ("tt" "Task" entry (file+headline "" "Tasks")
-  "* TODO %?\n  %i\n")
+     ("l" "Task with link" entry (file "")
+      "* TODO %?\n  %i\n %a")
 
-     ("tl" "Task with link" entry (file+headline "" "Tasks")
-  "* TODO %?\n  %i\n %a")
+     ("n" "Note" entry (file "")
+      "* %?\n %i\n")
 
-     ("n" "Note" entry (file+headline "" "Notes")
-  "* %?\n %i\n")
+     ("e" "Calendar event" entry (file "calendar.org")
+      "* %?\n %^t")
 
-     ("c" "Contact" entry (file+headline "" "Contacts")
-  "* %?
+     ("b" "Book" entry (file+headline "backlog.org" "Books")
+      "* %?\n %i\n")
+
+     ("m" "Movie" entry (file+headline "backlog.org" "Movies")
+      "* %?\n %i\n")
+
+     ("w" "Web" entry (file+headline "backlog.org" "Web")
+      "* %i\n%U\n\n")
+
+     ("c" "Contact" entry (file "")
+      "* %?
         :PROPERTIES:
         :PHONE: %^{phone number}
         :ADDRESS: %^{Street name Street no., Postal Code Postal Area, Country}
         :BIRTHDAY: %^{yyyy-mm-dd}
         :EMAIL: %^{name@domain.com}
         :NOTE: %^{NOTE}
-        :END:")
-
-     ("e" "Calendar event" entry (file+headline "calendar.org" "Calendar")
-  "* %?\n %^t")
-
-     ("m" "Media")
-
-     ("mb" "Book" entry (file+headline "backlog.org" "Books")
-  "* %?\n %i\n")
-
-     ("mm" "Movie" entry (file+headline "backlog.org" "Movies")
-  "* %?\n %i\n")
-
-     ("mw" "Web Capture" entry (file+headline "backlog.org" "Web")
-  "* %i\n%U\n\n"))))
+        :END:"))))
 
 (use-package org-habit
   :ensure nil
@@ -916,7 +918,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
    :view 'transpose-two-weeks))
 
 (my/leader-keys
-  "o" '(my/custom-open-calendar :which-key "open calendar"))
+  "c" '(my/custom-open-calendar :which-key "open calendar"))
 
 (use-package plantuml-mode
   :defer t
@@ -941,7 +943,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
    mu4e-root-maildir "~/.mail"
    mu4e-attachment-dir "~/Downloads"
    mu4e-maildir-shortcuts
-   '((:maildir "/Folders/viktigt" :key ?v)
+   '((:maildir "/INBOX"           :key ?i)
+     (:maildir "/Folders/viktigt" :key ?v)
      (:maildir "/Folders/orders"  :key ?b))
 
    mu4e-contexts
@@ -954,8 +957,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
                                                :to "mlonna@pm.me")))
        :vars '((user-mail-address . "mlonna@pm.me" )
                (user-full-name . "Martin Lönn Andersson")
-               (mu4e-drafts-folder . "/mlonna/Drafts")
-               (mu4e-sent-folder . "/mlonna/Sent")
+               (mu4e-drafts-folder . "/Drafts")
+               (mu4e-sent-folder . "/Sent")
                (mu4e-refile-folder . "/Archive")
                (mu4e-trash-folder . "/Trash")))
 
@@ -968,8 +971,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
                                                :to "nitramla@pm.me")))
        :vars '((user-mail-address . "nitramla@pm.me")
                (user-full-name . "Martin")
-               (mu4e-drafts-folder . "/nitramla/Drafts")
-               (mu4e-sent-folder . "/nitramla/Sent")
+               (mu4e-drafts-folder . "/Drafts")
+               (mu4e-sent-folder . "/Sent")
                (mu4e-refile-folder . "/Archive")
                (mu4e-trash-folder . "/Trash")))
 
@@ -982,8 +985,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
                                                :to "hemlg@pm.me")))
        :vars '((user-mail-address . "hemlg@pm.me")
                (user-full-name . "Martin")
-               (mu4e-drafts-folder . "/hemlg/Drafts")
-               (mu4e-sent-folder . "/hemlg/Sent")
+               (mu4e-drafts-folder . "/Drafts")
+               (mu4e-sent-folder . "/Sent")
                (mu4e-refile-folder . "/Archive")
                (mu4e-trash-folder . "/Trash")))
 
@@ -996,8 +999,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
                                                :to "trshcan@pm.me")))
        :vars '((user-mail-address . "trshcan@pm.me")
                (user-full-name . "Martin")
-               (mu4e-drafts-folder . "/trshcan/Drafts")
-               (mu4e-sent-folder . "/trshcan/Sent")
+               (mu4e-drafts-folder . "/Drafts")
+               (mu4e-sent-folder . "/Sent")
                (mu4e-refile-folder . "/Archive")
                (mu4e-trash-folder . "/Trash"))))
 
@@ -1023,17 +1026,12 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
    ;; re-flow mail so it's not hard wrapped
    mu4e-compose-format-flowed t
    ;; hide annoying retrieving msg in mini buffer
-   mu4e-hide-index-messages t)
+   mu4e-hide-index-messages t))
 
-  (add-to-list 'mu4e-bookmarks
-               '( :name "Inbox - mlonna"
-                  :query "maildir:/mlonna/INBOX"
-                  :key ?m))
-
-  (add-to-list 'mu4e-bookmarks
-               '( :name "Inbox - shopping"
-                  :query "maildir:/trshcan/INBOX"
-                  :key ?s)))
+  ;; (add-to-list 'mu4e-bookmarks
+  ;;              '( :name "Inbox"
+  ;;                 :query "maildir://INBOX"
+  ;;                 :key ?m)))
 
 (my/leader-keys
   "m" '(mu4e :which-key "open mail"))
