@@ -36,8 +36,8 @@ yabai -m config                                          \
                 window_opacity_duration     0.0          \
                                                          \
                 window_opacity              on           \
-                active_window_opacity       0.925        \
-                normal_window_opacity       0.87
+                active_window_opacity       0.95         \
+                normal_window_opacity       0.90
 
 # rules
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
@@ -61,3 +61,4 @@ yabai -m rule --add label="Alfred" app="^Alfred Preferences$" manage=off
 yabai -m rule --add label="Font Book" app="^Font Book$" manage=off
 yabai -m rule --add label="Karabiner" app="^Karabiner-Elements$" manage=off
 yabai -m rule --add label="Anki" app="^Anki$" title="(Add|Browse|Preview)" manage=off
+ yabai -m rule --add app="^qutebrowser$" role="AXWindow" subrole="AXDialog" manage=on # makes qutebrowser hide window decorations successfully
