@@ -53,7 +53,6 @@ Disabling them here before they've been initialized.
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
   (blink-cursor-mode -1)
-  (fringe-mode '(8 . 0))
 
 #+end_src
 
@@ -210,7 +209,8 @@ Set up MELPA, ELPA and Non-GNU ELPA and initialize the package manager.
   (setq package-archives
     '(("melpa" . "https://melpa.org/packages/")
       ("elpa" . "https://elpa.gnu.org/packages/")
-      ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
+      ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+      ("melpa-stable" . "https://stable.melpa.org/packages/")))
 
   (package-initialize)
 
@@ -905,6 +905,18 @@ A simple distraction-free editing experience: [[https://github.com/joaotavora/da
 
 #+end_src
 
+** Centered buffers
+
+#+begin_src emacs-lisp
+
+  (use-package perfect-margin
+    :diminish
+    :config
+    (perfect-margin-mode 1)
+    :custom
+    (perfect-margin-visible-width 90))
+
+#+end_src
 * General Programming
 ** Prog Mode
 
@@ -1634,6 +1646,9 @@ PlantUML Mode, a major mode for editing PlantUML sources.
 * Miscellaneous
 
 #+begin_src emacs-lisp
+
+  ;; display right and left fringe
+  (fringe-mode '(8 . 8))
 
   ;; soft-wrap text
   (global-visual-line-mode t)

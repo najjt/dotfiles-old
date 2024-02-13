@@ -75,7 +75,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (setq package-archives
   '(("melpa" . "https://melpa.org/packages/")
     ("elpa" . "https://elpa.gnu.org/packages/")
-    ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
+    ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+    ("melpa-stable" . "https://stable.melpa.org/packages/")))
 
 (package-initialize)
 
@@ -521,6 +522,13 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :bind ("C-x f" . darkroom-tentative-mode)
   :custom
   (darkroom-text-scale-increase 0.2))
+
+(use-package perfect-margin
+  :diminish
+  :config
+  (perfect-margin-mode 1)
+  :custom
+  (perfect-margin-visible-width 90))
 
 (use-package prog-mode
   :ensure nil
@@ -1043,6 +1051,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   (TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
   :config
   (pdf-tools-install))
+
+;; display right and left fringe
+(fringe-mode '(8 . 8))
 
 ;; soft-wrap text
 (global-visual-line-mode t)
