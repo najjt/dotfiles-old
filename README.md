@@ -6,6 +6,6 @@ Welcome to my dotfiles repository! It currently consists of the following compon
 * **Browser**: qutebrowser & Firefox
 * **OS**: macOS
 * **WM**: yabai
-* **Statusbar**: sketchybar
+* **Statusbar**: Sketchybar
 
 ![](resources/screenshot.png)
