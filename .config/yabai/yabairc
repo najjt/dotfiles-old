@@ -2,19 +2,28 @@
 
 # scripting addition
 sudo yabai --load-sa
-yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa && sh ~/.config/yabai/scripts/update_script_add.sh"
 
 # focus next window when quitting program
-yabai -m signal --add event=window_destroyed active=yes action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse &> /dev/null || yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id) &> /dev/null"
+yabai -m signal --add event=window_destroyed \
+      active=yes \
+      action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse &> /dev/null || yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id) &> /dev/null"
 
 # focus next window when minimizing window
-yabai -m signal --add event=window_minimized active=yes action="if \$(yabai -m query --windows --window \$YABAI_WINDOW_ID | jq -r '.\"is-floating\"'); then yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse &> /dev/null || yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id) &> /dev/null; fi"
+yabai -m signal --add event=window_minimized \
+      active=yes \
+      action="if \$(yabai -m query --windows --window \$YABAI_WINDOW_ID | jq -r '.\"is-floating\"'); then yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse &> /dev/null || yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id) &> /dev/null; fi"
 
 # trigger window_focus event in sketchybar when window is focused
-yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus &> /dev/null"
+yabai -m signal --add event=window_focused \
+      action="sketchybar --trigger window_focus &> /dev/null"
 
 # clean up empty spaces with no windows on them
-yabai -m signal --add event=space_changed action="sh ~/.config/yabai/scripts/destroy_empty_spaces.sh && sketchybar --trigger space_change"
+yabai -m signal --add event=space_changed \
+      action="sh ~/.config/yabai/scripts/destroy_empty_spaces.sh && sketchybar --trigger space_change"
+
+yabai -m signal --add event=application_front_switched action="${functions[topmost_opacity]}"
+yabai -m signal --add event=window_focused action="${functions[topmost_opacity]}"
 
 # defaults
 yabai -m config                                          \
@@ -36,7 +45,7 @@ yabai -m config                                          \
                 window_opacity_duration     0.0          \
                                                          \
                 window_opacity              on           \
-                active_window_opacity       0.95         \
+                active_window_opacity       0.97         \
                 normal_window_opacity       0.90
 
 # rules
@@ -61,4 +70,21 @@ yabai -m rule --add label="Alfred" app="^Alfred Preferences$" manage=off
 yabai -m rule --add label="Font Book" app="^Font Book$" manage=off
 yabai -m rule --add label="Karabiner" app="^Karabiner-Elements$" manage=off
 yabai -m rule --add label="Anki" app="^Anki$" title="(Add|Browse|Preview)" manage=off
- yabai -m rule --add app="^qutebrowser$" role="AXWindow" subrole="AXDialog" manage=on # makes qutebrowser hide window decorations successfully
+yabai -m rule --add app="^qutebrowser$" role="AXWindow" subrole="AXDialog" manage=on # makes qutebrowser hide window decorations successfully
+yabai -m rule --add app="^sioyek$" role="AXWindow" subrole="AXDialog" manage=on # same for sioyek
+
+
+function topmost_opacity {
+    {
+        windows="$(yabai -m query --windows)"
+
+        query='.has-fullscreen-zoom == "true"'
+
+        jq -n --argjson windows "${windows}" "\$windows[] | select((${query}) | not).id" |
+            xargs -I{} yabai -m window {} --opacity 1.0
+
+        jq -n --argjson windows "${windows}" "\$windows[] | select(${query}).id" |
+            xargs -I{} yabai -m window {} --opacity 0.9
+
+    } 2>/dev/null
+}
