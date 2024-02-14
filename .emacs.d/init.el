@@ -1034,7 +1034,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
    ;; re-flow mail so it's not hard wrapped
    mu4e-compose-format-flowed t
    ;; hide annoying retrieving msg in mini buffer
-   mu4e-hide-index-messages t))
+   mu4e-hide-index-messages t
+   mu4e-index-update-error-warning 'nil))
 
   ;; (add-to-list 'mu4e-bookmarks
   ;;              '( :name "Inbox"
