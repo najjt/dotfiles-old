@@ -914,7 +914,7 @@ A simple distraction-free editing experience: [[https://github.com/joaotavora/da
     :config
     (perfect-margin-mode 1)
     :custom
-    (perfect-margin-visible-width 90))
+    (perfect-margin-visible-width 100))
 
 #+end_src
 * General Programming
