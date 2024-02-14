@@ -907,6 +907,8 @@ A simple distraction-free editing experience: [[https://github.com/joaotavora/da
 
 ** Centered buffers
 
+[[https://github.com/mpwang/perfect-margin][perfect-margin]] makes some buffers centered.
+
 #+begin_src emacs-lisp
 
   (use-package perfect-margin
