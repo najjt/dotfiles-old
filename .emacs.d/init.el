@@ -1037,11 +1037,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
    mu4e-hide-index-messages t
    mu4e-index-update-error-warning 'nil))
 
-  ;; (add-to-list 'mu4e-bookmarks
-  ;;              '( :name "Inbox"
-  ;;                 :query "maildir://INBOX"
-  ;;                 :key ?m)))
-
 (my/leader-keys
   "m" '(mu4e :which-key "open mail"))
 
