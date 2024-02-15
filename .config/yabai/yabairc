@@ -22,12 +22,9 @@ yabai -m signal --add event=window_focused \
 yabai -m signal --add event=space_changed \
       action="sh ~/.config/yabai/scripts/destroy_empty_spaces.sh && sketchybar --trigger space_change"
 
-yabai -m signal --add event=application_front_switched action="${functions[topmost_opacity]}"
-yabai -m signal --add event=window_focused action="${functions[topmost_opacity]}"
-
 # defaults
 yabai -m config                                          \
-                layout                      bsp          \
+                layout                      float        \
                 split_ratio                 0.50         \
                 split_type                  auto         \
                 auto_balance                off          \
