@@ -735,6 +735,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (use-package org
   :pin nongnu
   :ensure org-contrib ; needed for org-contacts
+  :diminish org-indent-mode
+  :hook (org-mode . org-indent-mode)
   :bind (("C-c a" . org-agenda)
          ("C-c c" . org-capture)
          ("C-c l" . org-store-link))
@@ -744,7 +746,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
         org-todo-keywords '((sequence "TODO" "NEXT" "|" "DONE"))
         org-tags-column 0
         org-startup-folded t
-        org-export-backends '(md org ascii html icalendar latex odt rss))
+        org-export-backends '(md org ascii html icalendar latex odt rss)
+        org-ellipsis " ▾")
 
   ;; remap org indentation keys
   (with-eval-after-load 'org
@@ -753,8 +756,12 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
      "C-c i" 'org-metaright
      "C-c u" 'org-metaleft)))
 
+;; change default bullets
 (use-package org-bullets
-  :hook (org-mode . org-bullets-mode))
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 (use-package org-agenda
   :ensure nil
