@@ -501,6 +501,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (use-package dashboard
   :demand t
   :diminish (dashboard-mode page-break-lines-mode)
+  :custom-face
+  (dashboard-items-face ((t (:weight normal))))
   :custom
   (dashboard-items '((bookmarks . 7)
                      (projects . 5)))
