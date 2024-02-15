@@ -921,6 +921,7 @@ A simple distraction-free editing experience: [[https://github.com/joaotavora/da
     (perfect-margin-visible-width 100))
 
 #+end_src
+
 * General Programming
 ** Prog Mode
 
@@ -1257,6 +1258,9 @@ I organize my life with [[https://orgmode.org/][Org Mode]]. The following header
        :keymaps 'org-mode-map
        "C-c i" 'org-metaright
        "C-c u" 'org-metaleft)))
+
+  (use-package org-bullets
+    :hook (org-mode . org-bullets-mode))
 
 #+end_src
 

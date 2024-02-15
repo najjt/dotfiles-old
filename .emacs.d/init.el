@@ -753,6 +753,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
      "C-c i" 'org-metaright
      "C-c u" 'org-metaleft)))
 
+(use-package org-bullets
+  :hook (org-mode . org-bullets-mode))
+
 (use-package org-agenda
   :ensure nil
   :after org
