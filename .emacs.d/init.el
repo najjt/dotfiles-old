@@ -484,7 +484,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; turn on line numbers and highlight current line
 (dolist (hook '(conf-mode-hook prog-mode-hook text-mode-hook markdown-mode-hook org-mode-hook))
   (add-hook hook 'display-line-numbers-mode)
-  (add-hook hook 'hl-line-mode))
+  ;(add-hook hook 'hl-line-mode)
+  )
 
 ;; relative line numbers
 (setq display-line-numbers-type 'relative)
@@ -758,6 +759,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+(use-package toc-org
+  :hook (org-mode . toc-org-mode))
 
 (use-package org-agenda
   :ensure nil

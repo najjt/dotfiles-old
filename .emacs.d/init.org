@@ -2,6 +2,71 @@
 #+AUTHOR: Martin Lönn Andersson
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el
 
+* Table of Contents
+- [[#preamble][Preamble]]
+- [[#startup][Startup]]
+  - [[#early-init][Early Init]]
+  - [[#garbage-collection][Garbage Collection]]
+  - [[#define-constants][Define Constants]]
+  - [[#os-specific-adaptions][OS-specific Adaptions]]
+  - [[#load-path][Load Path]]
+  - [[#custom-file][Custom File]]
+  - [[#backup-directory][Backup Directory]]
+- [[#package-management][Package Management]]
+  - [[#package-archives--initialize-package-manager][Package Archives & Initialize Package Manager]]
+  - [[#use-package][Use Package]]
+  - [[#auto-package-update][Auto Package Update]]
+  - [[#diminish][Diminish]]
+- [[#global-functionalities][Global Functionalities]]
+  - [[#user-information][User Information]]
+  - [[#environment-variables][Environment Variables]]
+  - [[#swiper][Swiper]]
+  - [[#markdown-mode][Markdown Mode]]
+  - [[#spell-checking][Spell Checking]]
+  - [[#history][History]]
+  - [[#undo-tree][Undo Tree]]
+  - [[#general][General]]
+  - [[#evil][Evil]]
+  - [[#hydra][Hydra]]
+  - [[#dired][Dired]]
+  - [[#help-functionality][Help functionality]]
+  - [[#terminal][Terminal]]
+  - [[#smooth-scrolling][Smooth Scrolling]]
+  - [[#tabs][Tabs]]
+- [[#ui-enhancements][UI Enhancements]]
+  - [[#font--icons][Font & Icons]]
+  - [[#modeline][Modeline]]
+  - [[#themes][Themes]]
+  - [[#popup-buffers][Popup Buffers]]
+  - [[#lines][Lines]]
+  - [[#title-bar][Title Bar]]
+  - [[#dashboard][Dashboard]]
+  - [[#focused-editing][Focused editing]]
+  - [[#centered-buffers][Centered buffers]]
+- [[#general-programming][General Programming]]
+  - [[#prog-mode][Prog Mode]]
+  - [[#lsp][LSP]]
+  - [[#lsp-ui][LSP UI]]
+  - [[#dap][DAP]]
+  - [[#flycheck][Flycheck]]
+  - [[#completions][Completions]]
+  - [[#comments][Comments]]
+  - [[#match-delimiters][Match Delimiters]]
+  - [[#projectile][Projectile]]
+  - [[#magit][Magit]]
+- [[#programming][Programming]]
+  - [[#java][Java]]
+  - [[#python][Python]]
+  - [[#tex][TeX]]
+- [[#office][Office]]
+  - [[#org][Org]]
+  - [[#calendar][Calendar]]
+  - [[#plantuml--graphviz][PlantUML & Graphviz]]
+  - [[#mail][Mail]]
+  - [[#pdf-tools][PDF Tools]]
+- [[#miscellaneous][Miscellaneous]]
+- [[#tangle--reload-on-save][Tangle & Reload On Save]]
+
 * Preamble
 
 Welcome to my Emacs configuration. This is a literate configuration, meaning code and prose are intertwined in order to provide clear documentation. [[https://orgmode.org/worg/org-contrib/babel/][Org Babel]] makes this possible in =org= files, like this one.
@@ -839,7 +904,8 @@ Popup buffers with [[https://github.com/karthink/popper][popper]].
   ;; turn on line numbers and highlight current line
   (dolist (hook '(conf-mode-hook prog-mode-hook text-mode-hook markdown-mode-hook org-mode-hook))
     (add-hook hook 'display-line-numbers-mode)
-    (add-hook hook 'hl-line-mode))
+    ;(add-hook hook 'hl-line-mode)
+    )
 
   ;; relative line numbers
   (setq display-line-numbers-type 'relative)
@@ -1264,6 +1330,9 @@ I organize my life with [[https://orgmode.org/][Org Mode]]. The following header
     :hook (org-mode . org-bullets-mode)
     :custom
     (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+  (use-package toc-org
+    :hook (org-mode . toc-org-mode))
 
 #+end_src
 
