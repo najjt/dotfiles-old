@@ -425,6 +425,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
       hscroll-margin 1)
 
 (use-package perspective
+  :hook (persp-created . dashboard-open)
   :bind
   ("C-x C-b" . persp-list-buffers)
   :custom

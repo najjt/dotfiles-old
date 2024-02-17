@@ -797,11 +797,14 @@ A better terminal emulation with [[https://github.com/akermu/emacs-libvterm][vte
 
 #+end_src
 
-** Tabs
+** Perspective
+
+Workspaces: [[https://github.com/nex3/perspective-el][perspective]].
 
 #+begin_src emacs-lisp
 
   (use-package perspective
+    :hook (persp-created . dashboard-open)
     :bind
     ("C-x C-b" . persp-list-buffers)
     :custom
