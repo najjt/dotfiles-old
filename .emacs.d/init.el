@@ -105,7 +105,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :diminish centered-window-mode
   :diminish eldoc-mode
   :diminish evil-collection-unimpaired-mode
-  :diminish abbrev-mode
+  :diminish org-indent-mode
   :diminish lsp-lens-mode
   :diminish lsp-modeline-workspace-status-mode)
 
