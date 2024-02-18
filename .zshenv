@@ -1,16 +1,3 @@
-path=(
-    /opt/local/sbin
-    /opt/local/bin
-    /usr/local/bin
-    /usr/bin
-    /usr/local/sicstus4.8.0/bin
-    /Applications/WezTerm.app/Contents/MacOS
-    /Users/najjt/Library/Python/3.9/bin
-    /Users/najjt/Projects/kod/scripts
-    $path
-)
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-
 # xdg
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -23,15 +10,7 @@ export LC_ALL="en_IE.UTF-8"
 
 # default programs
 export BROWSER=qutebrowser
-export TERMINAL=kitty
+export TERMINAL=wezterm
 export EDITOR=emacsclient
 export VISUAL=emacsclient
 export PAGER=cat
-
-# jupyter
-export JUPYTER_PATH=/opt/homebrew/share/jupyter
-export JUPYTER_CONFIG_PATH=/opt/homebrew/etc/jupyter
-
-# java home
-#export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home"
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home"
