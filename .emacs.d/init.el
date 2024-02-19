@@ -336,14 +336,13 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
   :ensure nil
   :commands (dired dired-jump)
   :hook (dired-mode . (lambda () (dired-hide-details-mode)))
+  :bind ("C-x C-j" . dired-jump)
   :custom
   (dired-free-space nil)
   :config
-  (use-package dired-single) ; reuse buffer
   (evil-collection-define-key 'normal 'dired-mode-map
-    "h" 'dired-single-up-directory
-    "l" 'dired-single-buffer)
-
+    "h" 'dired-up-directory
+    "l" 'dired-find-file)
   (use-package nerd-icons-dired ; use nerd icons in dired
   :diminish
   :hook

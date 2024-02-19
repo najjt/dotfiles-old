@@ -659,22 +659,19 @@ An easier way to set keybindings is with [[https://github.com/noctuid/general.el
 
 ** Dired
 
-Hide details and highlight the current line in =dired=. Reuse =dired= buffers with [[https://codeberg.org/amano.kenji/dired-single][dired-single]]. [[https://github.com/rainstormstudio/nerd-icons-dired][nerd-icons-dired]] provides file icons.
-
 #+begin_src emacs-lisp
 
   (use-package dired
     :ensure nil
     :commands (dired dired-jump)
     :hook (dired-mode . (lambda () (dired-hide-details-mode)))
+    :bind ("C-x C-j" . dired-jump)
     :custom
     (dired-free-space nil)
     :config
-    (use-package dired-single) ; reuse buffer
     (evil-collection-define-key 'normal 'dired-mode-map
-      "h" 'dired-single-up-directory
-      "l" 'dired-single-buffer)
-
+      "h" 'dired-up-directory
+      "l" 'dired-find-file)
     (use-package nerd-icons-dired ; use nerd icons in dired
     :diminish
     :hook
