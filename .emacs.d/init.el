@@ -955,6 +955,10 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
     ("e" . mu4e-view-save-attachment))
   :config
   (add-to-list 'gnutls-trustfiles (expand-file-name "~/.config/protonmail/bridge/cert.pem"))
+
+  (setq mail-user-agent 'mu4e-user-agent) ; mu4e default email client
+  (set-variable 'read-mail-command 'mu4e) ; mu4e default email reader
+
   (setq
    ;; User info
    user-mail-address "mlonna@pm.me"
