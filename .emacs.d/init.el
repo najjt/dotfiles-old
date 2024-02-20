@@ -916,20 +916,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (use-package calfw-org
   :after calfw)
 
-;; visual time blocks
-(use-package calfw-blocks
-  :ensure nil
-  :demand t
-  :after calfw
-  :load-path ("~/.emacs.d/elisp/calfw-blocks")
-  :bind
-  (:map cfw:calendar-mode-map
-        ("t" . calfw-blocks-change-view-transpose-two-weeks))
-  :config
-  (setq calfw-blocks-earliest-visible-time '(7 0)
-        calfw-blocks-default-event-length 1
-        calfw-blocks-lines-per-hour 4))
-
 ;; open calendar with two weeks view
 (defun my/custom-open-calendar ()
   (interactive)
@@ -937,7 +923,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
    :contents-sources
    (list
     (cfw:org-create-source "medium purple"))
-   :view 'transpose-two-weeks))
+   :view 'two-weeks))
 
 (my/leader-keys
   "c" '(my/custom-open-calendar :which-key "open calendar"))
