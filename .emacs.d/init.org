@@ -956,7 +956,7 @@ The [[https://github.com/emacs-dashboard/emacs-dashboard][Dashboard]] package di
 
 #+end_src
 
-** Focused editing
+** Focused Editing
 
 A simple distraction-free editing experience: [[https://github.com/joaotavora/darkroom][Darkroom]].
 
@@ -969,7 +969,7 @@ A simple distraction-free editing experience: [[https://github.com/joaotavora/da
 
 #+end_src
 
-** Centered buffers
+** Centered Buffers
 
 [[https://github.com/mpwang/perfect-margin][perfect-margin]] makes some buffers centered.
 
@@ -977,10 +977,12 @@ A simple distraction-free editing experience: [[https://github.com/joaotavora/da
 
   (use-package perfect-margin
     :diminish
-    :config
-    (perfect-margin-mode 1)
     :custom
-    (perfect-margin-visible-width 100))
+    (perfect-margin-visible-width 100)
+    :config
+    (perfect-margin-mode t)
+    (setq perfect-margin-ignore-modes
+          '(dired-mode)))
 
 #+end_src
 

@@ -524,10 +524,12 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (use-package perfect-margin
   :diminish
-  :config
-  (perfect-margin-mode 1)
   :custom
-  (perfect-margin-visible-width 100))
+  (perfect-margin-visible-width 100)
+  :config
+  (perfect-margin-mode t)
+  (setq perfect-margin-ignore-modes
+        '(dired-mode)))
 
 (use-package prog-mode
   :ensure nil
